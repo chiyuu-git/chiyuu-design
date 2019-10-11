@@ -41,4 +41,18 @@ app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
 
+const WebSocket = require('ws')
+const ws = new WebSocket.Server({port: 8888})
+
+ws.on('connection', ws => {
+    console.log('server connection')
+
+    ws.on('message', msg => {
+      console.log('server receive msg：', msg)
+    })
+    
+    ws.send('Information from the server')
+})
+
+
 module.exports = app
