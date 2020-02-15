@@ -19,7 +19,8 @@ module.exports = merge.smart(baseWebpackConfig, {
     inline: true,// 设置为true，当源文件改变时会自动刷新页面
     hot: true,// 模块热更新，取决于HotModuleReplacementPlugin
     host: '127.0.0.1',// 设置默认监听域名，如果省略，默认为“localhost”
-    port: 8080// 设置默认监听端口，如果省略，默认为“8080”
+    port: 8080,// 设置默认监听端口，如果省略，默认为“8080”
+    contentBase: './dist'
   },
   // 插件
   plugins: [
@@ -33,5 +34,9 @@ module.exports = merge.smart(baseWebpackConfig, {
   resolve: {
     // 自动添加模块后缀名
     extensions: [".wasm", ".mjs", ".js", ".json", ".jsx"],
+    // 快捷访问
+    alias: {
+      assets: path.resolve(__dirname, '../src/assets')
+    }
   },
 })

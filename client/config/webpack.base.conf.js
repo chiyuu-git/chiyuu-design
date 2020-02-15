@@ -25,6 +25,14 @@ module.exports = {
         use:['style-loader','css-loader','less-loader']
       },
       {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader:'url-loader',
+        options: {
+          name: './images/[name].[ext]',
+          limit: 1024
+        }        
+      },
+      {
         test: /\.jsx?/, // 支持 js 和 jsx
         include: [
           path.resolve(__dirname, '../src'), // src 目录下的才需要经过 babel-loader 处理
