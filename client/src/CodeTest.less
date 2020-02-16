@@ -1,0 +1,109 @@
+@import 'assets/variate.less';
+
+.code_test_box{
+  flex-grow: 1;
+  display: flex;
+  background-color: #f5f5f5;
+  .test_box{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    overflow: auto;
+    header{
+      height:50px;
+      padding:20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .test_info{
+      flex-grow: 1;
+      .placeholder{
+        height:50px;
+        padding:20px;
+        color:#888;
+        font-size: 12px;
+        background-color: #e3e3e3;
+      }
+    }
+  }
+  .code_box{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+    .code_toolbar{
+      display: flex;
+      align-items: center;
+      height:48px;
+      padding: 5px 20px;
+      background-color: #181e22;
+      .language_btn{
+        display: inline-block;
+        position: relative;
+        width: 120px;
+        padding: 0 10px;
+        line-height:40px;
+        background-color: #516169;
+        color: white;
+        .candidate_list{
+          display: none;
+          position: absolute;
+          left:0px;
+          z-index: 4;
+          width: 120px;
+          padding:0 10px;
+          background-color: #516169;
+        }
+        &:hover{
+          background-color: #46535a;
+          .candidate_list{
+            display: block;
+          }
+        }
+      }
+      a:nth-child(n+2){
+        margin-left:10px;
+        font-size: 12px;
+        color:white;
+        line-height:40px;
+        .iconfont{
+          font-size: 18px;
+          vertical-align: middle;
+        }
+      }
+      a:nth-child(n+2):hover{
+        color:@funcBtn;
+      }
+      .recover_btn>{
+        transform: rotateY(180deg);
+        backface-visibility: visible;
+      }
+      .placeholder{
+        flex-grow:1;
+      }
+    }
+    .CodeMirror-wrap{
+      flex-grow: 1;
+    }
+    .code_result{
+      display: flex;
+      align-items: center;
+      height:48px;
+      padding:0 10px;
+      margin:10px 0;
+      border:@border;
+      background-color: white;
+      .grow_wrap{
+        flex-grow: 1;
+        .result_btn{
+          color:black;
+          cursor: pointer;
+        }
+      }
+      .run_btn{
+        background-color: #29bdb9;
+        color:#fff;
+      }
+    }
+  }
+}

@@ -5,9 +5,9 @@ import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
 import './index.less'
 import logo from './assets/image/logo.png'
 
-import CodeTest from './codeTest'
-import UploadFile from './uploadFile'
-import EquipmentInfo from './equipmentInfo'
+import CodeTest from './CodeTest'
+import UploadFile from './UploadFile'
+import EquipmentInfo from './EquipmentInfo'
 
 function Frame(props) {
   return (
@@ -49,7 +49,7 @@ function Frame(props) {
                 <a className='icon_btn'><i className='iconfont icon-audio'></i><span>语音通话</span></a>
               </div>
               <div className='video_tip'>发起聊天前，建议先进行检测设备</div>
-              <div className='video_toolbar'><i className='iconfont icon-full_screen'></i></div>
+              <div className='video_toolbar'><i className='iconfont icon-fullscreen'></i></div>
             </div>
             <div className='interviewer_info'>
               <p>面试官 - 许可<span className='status'>离线</span></p>
