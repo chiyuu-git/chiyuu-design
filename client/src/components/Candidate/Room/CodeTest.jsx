@@ -5,7 +5,7 @@ import CM from './CM'
 
 import './CodeTest.less'
 
-const codeTest = () => {
+const CodeTest = () => {
   
   return (
     <section className='code_test_box'>
@@ -45,4 +45,4 @@ const codeTest = () => {
   );
 }
 
-export default codeTest;
+export default CodeTest;

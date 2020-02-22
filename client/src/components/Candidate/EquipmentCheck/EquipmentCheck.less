@@ -1,0 +1,84 @@
+@import '~assets/variate.less';
+
+.equipmentCheck_box{
+  height:100%;
+  display: flex;
+  justify-content: center;
+  background-color: #f5f5f5;
+  .check_box{
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    margin:10px 0;
+    border:@border;
+    border-radius: 5px;
+    background-color: white;
+    .header{
+      display: flex;
+      line-height:60px;
+      padding:0 20px;
+      border-bottom: @border;
+      .room_info{width: 100px;}
+      .title{flex-grow: 1;text-align: center;}
+      .holder{width: 100px;}
+    }
+    .check_body{
+      flex-grow: 1;
+      display: grid;
+      grid-template-rows:125px 1fr 75px;
+      grid-template-columns:1fr 1fr;
+      grid-template-areas:
+      'tips tips'
+      'audio_check video_check'
+      'confirm confirm';
+      grid-column-gap:50px;
+      padding : 40px 50px;
+      .tips{
+        grid-area:tips;
+        .welcome{
+          font-size:24px;
+        }
+        .direction{
+          padding-top:10px;
+          font-size:14px;
+        }
+      }
+      .audio_check{
+        grid-area:audio_check;
+        border-radius:10px;
+        background: #f5f5f5;
+        .row1{
+          text-align: center;
+          &>p:nth-child(1){
+            line-height:40px;
+            font-size:24px;
+          }
+          &>p:nth-child(2){
+            margin-top:10px;
+            line-height:40px;
+            font-size:14px;
+            color:@tipColor;
+          }
+          .line{
+            justify-self: center;
+            border-bottom:@border;
+            height:0px;
+            width:90%;
+          }
+        }
+        .record{
+          .btn{
+            color:red;
+            font-size:14px;
+          }
+        }
+      }
+      .video_check{
+        grid-area:video_check;
+      }
+      .confirm_info{
+        grid-area:confirm;
+      }
+    }
+  }
+}

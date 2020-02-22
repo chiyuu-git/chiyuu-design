@@ -46,7 +46,7 @@ const CM = () => {
       ...commonOptions,
       styleActiveLine:true,
     })
-  })
+  },[])
   return (
     <textarea ref={cm_placeholder}>
     </textarea>
