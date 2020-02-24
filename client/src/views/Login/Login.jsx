@@ -26,7 +26,7 @@ const Login = () => {
             <input type="text" name="room_password" id="room_password"/>
           </div>
           <div className="form_group">
-            <NavLink to='/candidate/equipment' className='btn confirm_info'>确定</NavLink>
+            <NavLink to='/candidate/equipmentCheck' className='btn confirm_info'>确定</NavLink>
           </div>
         </div>
       </form>

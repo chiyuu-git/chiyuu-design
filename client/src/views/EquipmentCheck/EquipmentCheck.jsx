@@ -8,7 +8,7 @@ const EquipmentCheck = () => {
   return (
     <section className='equipmentCheck_box'>
       <div className="check_box">
-        <header className="header">
+        <header className="check_header">
           <div className="room_info">房间号:12345</div>
           <div className="title">通讯设备检测</div>
           <div className="holder"></div>
@@ -25,20 +25,28 @@ const EquipmentCheck = () => {
               <div className="line"></div>
             </div>
             <div className="record">
-              <p>点击右侧按钮进行录音</p>
-              <a className='btn'>
-                <i className='iconfont icon-pause'></i>
+              <p>1.点击下面的按钮进行录音</p>
+              <a className='record_btn'>
+                <i className='iconfont icon-record'></i>
+                录音
               </a>
+              <i className='iconfont icon-volume'></i>
             </div>
-            <div className="replay">
-              <p>点击右侧按钮播放录音</p>
-              <a className='replay_btn'></a>
+            <div className="record">
+              <p>2.点击下面的按钮播放录音</p>
+              <a className='record_btn'>
+                <i className='iconfont icon-record'></i>
+                播放录音
+              </a>
+              <i className='iconfont icon-volume'></i>
             </div>
           </div>
           <div className="video_check">
-            <p>视频设备检测</p>
-            <p>请保持人脸清晰，不要有物品遮挡摄像头</p>
-            <div className="line"></div>
+          <div className="row1">
+              <p>视频设备检测</p>
+              <p>请保持人脸清晰，不要有物品遮挡摄像头</p>
+              <div className="line"></div>
+            </div>
             <div className="video">
             </div>
           </div>

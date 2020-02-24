@@ -36,7 +36,8 @@ module.exports = merge.smart(baseWebpackConfig, {
     extensions: [".wasm", ".mjs", ".js", ".json", ".jsx"],
     // 快捷访问
     alias: {
-      assets: path.resolve(__dirname, '../src/assets')
+      assets: path.resolve(__dirname, '../src/assets'),
+      views: path.resolve(__dirname, '../src/views')
     }
   },
 })
