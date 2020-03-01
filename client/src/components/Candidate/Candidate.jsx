@@ -1,11 +1,11 @@
 import React from 'react';
 import {Switch, Route, NavLink} from 'react-router-dom'
 
-import Header from 'views/Header'
-import Footer from 'views/Footer'
-import Login from 'views/Login/Login'
-import EquipmentCheck from 'views/EquipmentCheck/EquipmentCheck'
-import Room from 'views/Room/Room'
+import Header from 'shared/Header'
+import Footer from 'shared/Footer'
+import Entry from './Entry/Entry'
+import EquipmentCheck from 'shared/EquipmentCheck'
+import Room from 'shared/Room/Room'
 import './Candidate.less'
 const Candidate = () => {
   return (
@@ -13,8 +13,8 @@ const Candidate = () => {
       <Header/>
       <div className="candidate_body">
         <Switch>
-          <Route exact path='/candidate' component={Login}/>
-          <Route path='/candidate/login' component={Login}/>
+          <Route exact path='/candidate' component={Entry}/>
+          <Route path='/candidate/login' component={Entry}/>
           <Route path='/candidate/equipmentCheck' component={EquipmentCheck}/>
           <Route path='/candidate/room' component={Room} />
         </Switch>

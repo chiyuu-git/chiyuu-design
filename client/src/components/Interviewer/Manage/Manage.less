@@ -40,5 +40,21 @@
         .sort{background-color: #16c2c2;}
       }
     }
+    .candidate_table{
+      .table_header{
+        line-height:40px;
+        border-collapse: collapse;
+        th{
+          border: @border;
+          border-top:transparent;
+        }
+        th:first-child{border-left:transparent}
+        th:last-child{border-right:transparent}
+      }
+      .table_row{
+        line-height:50px;
+        text-align: center;
+      }
+    }
   }
 }
