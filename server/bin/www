@@ -12,7 +12,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '6503');
 // app.set('port', port);
 
 /**
@@ -28,7 +28,12 @@ var server = http.createServer(app.callback());
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
+/* NOTE: ws */
+const WebSocket = require('ws')
+// 挂载在koa的服务器上
+const webSocketServer = new WebSocket.Server({server})
+const webSocketAPI = require('../ws')
+webSocketAPI(webSocketServer)
 /**
  * Normalize a port into a number, string, or false.
  */

@@ -41,36 +41,8 @@ app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
 
-const WebSocket = require('ws')
-const ws = new WebSocket.Server({port: 8888})
-
-ws.on('open', function open() {
-  console.log('ws open');
-});
-
-ws.on('close', function close() {
-  console.log('ws closed');
-});
 
 
-ws.on('connection', (server,req) => {
-    const ip = req.connection.remoteAddress
-    const port = req.connection.remotePort
-    const clientName = ip + port
 
-    console.log('%s is connected', clientName)
-    
-    // 发送消息给客户端
-    server.send("Welcome " + clientName)
-    server.on('message', msg => {
-      console.log('received: %s from %s', msg, clientName)
-      // 广播消息给所有客户端
-      ws.clients.forEach(function each(client) {
-        if (client.readyState === WebSocket.OPEN) {
-          client.send( clientName + " -> " + message)
-        }
-      })
-    })
-})
 
 module.exports = app

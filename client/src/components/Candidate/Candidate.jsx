@@ -12,12 +12,12 @@ const Candidate = () => {
     <section className='candidate_box'>
       <Header/>
       <div className="candidate_body">
-        <Switch>
-          <Route exact path='/candidate' component={Entry}/>
-          <Route path='/candidate/login' component={Entry}/>
-          <Route path='/candidate/equipmentCheck' component={EquipmentCheck}/>
-          <Route path='/candidate/room' component={Room} />
-        </Switch>
+    <Switch>
+      <Route exact path='/candidate' component={Entry}/>
+      <Route path='/candidate/login' component={Entry}/>
+      <Route path='/candidate/equipmentCheck' component={EquipmentCheck}/>
+      <Route path='/candidate/room' component={Room} />
+    </Switch>
       </div>
       <Footer/>
     </section>

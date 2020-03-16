@@ -15,17 +15,17 @@ const Interviewer = () => {
     <section className='interviewer_box'>
       <Header/>
       <div className="interviewer_body">
-        <Switch>
-          <Route exact path='/' component={EquipmentCheck}/>
-          <Route path='/interviewer/login' component={Entry}/>
-          <Route path='/interviewer/manage' component={Manage}/>
-          <Route path='/interviewer/equipmentCheck' component={EquipmentCheck}/>
-          <Route path='/interviewer/room' component={Room} />
-        </Switch>
+    <Switch>
+      <Route exact path='/' component={Room}/>
+      <Route path='/interviewer/login' component={Entry}/>
+      <Route path='/interviewer/manage' component={Manage}/>
+      <Route path='/interviewer/equipmentCheck' component={EquipmentCheck}/>
+      <Route path='/interviewer/room' component={Room} />
+    </Switch>
       </div>
       <Footer/>
     </section>
-  );
-};
+  )
+}
 
 export default Interviewer;
