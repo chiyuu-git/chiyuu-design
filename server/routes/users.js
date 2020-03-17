@@ -1,13 +1,12 @@
 const router = require('koa-router')()
+const UserController = require('../controllers/users.js')
 
-router.prefix('/users')
+// router.prefix('/api/users')
 
-router.get('/', function (ctx, next) {
-  ctx.body = 'this is a users response!'
-})
+// 用户登陆，如果没有就注册
+router.post('/login',UserController.login)
 
-router.get('/bar', function (ctx, next) {
-  ctx.body = 'this is a users/bar response'
-})
+router.post('/user/:id', UserController.getUserInfo) //用POST请求
+router.patch('/user/update/:id',UserController.updateUser) // 更新用户信息
 
 module.exports = router

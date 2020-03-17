@@ -2,7 +2,17 @@
 // action-types
 const LOGIN = 'LOGIN'; 
 
+import {reqLogin} from 'api'
+
 // actionCreator
+// 异步`action creator`(返回一个函数)
+export const loginAsync = ({name,phone}) => {
+  return dispatch => {
+    console.log(6)
+    reqLogin({name,phone})
+    dispatch(login(result))
+  }
+}
 export function login(name,phone) { 
   return { 
     type:LOGIN, 

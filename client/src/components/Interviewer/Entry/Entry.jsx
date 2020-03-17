@@ -1,7 +1,7 @@
 import React ,{useState}from 'react';
 import {NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'; 
-import { login } from './EntryRedux';
+import { loginAsync,login } from './EntryRedux';
 
 const Entry = (props) => {
   const [form,setForm] = useState({
@@ -11,6 +11,14 @@ const Entry = (props) => {
 
   const handleChange = (e) => {
     setForm({...form,[e.target.id]:e.target.value})
+  }
+
+  const handelClick = (e) => {
+    console.log('1')
+    const {name,phone} = form
+    loginAsync({name,phone})
+    // loginAsync({...form})
+    login(name,phone)
   }
   
   return (
@@ -26,15 +34,12 @@ const Entry = (props) => {
           <input type="text" name="phone" id='phone' onChange={handleChange}/>
         </div>
         <div className="form_group">
-          <NavLink 
+          <a 
             to='/candidate/equipmentCheck' 
             className='btn confirm_info'
-            onClick={e=>{
-              props.login(form.name,form.phone)
-              console.log(1)
-            }}>
+            onClick={handelClick}>
               确定
-          </NavLink>
+          </a>
         </div>
       </div>
     </form>
@@ -45,5 +50,5 @@ const Entry = (props) => {
 
 export default connect(
   null,
-  {login}
+  {loginAsync,login}
 )(Entry); 
