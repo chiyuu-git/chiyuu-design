@@ -54,6 +54,33 @@
       .table_row{
         line-height:50px;
         text-align: center;
+        td{
+          padding:0 5px;
+          input{
+            text-align:center;
+          }
+        }
+        td:nth-child(1)>input{width:100px;}
+        td:nth-child(2)>input{width:150px;}
+        td:nth-child(3)>input{width:150px;}
+        td:nth-child(4)>input{width:150px;}
+        td:nth-child(5)>input{width:100px;}
+        td:last-child{width:200px;}
+        .table_btn{
+          display: inline-block;
+          width:80px;
+          padding:10px 0;
+          font-size:14px;
+          line-height:normal;
+          text-align:center;
+          cursor: pointer;
+          color:white;
+          background-color: @funcBtn;
+          margin-left:5px;
+        }
+      }
+      .editable{
+        input{border:@border;}
       }
     }
   }

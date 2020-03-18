@@ -1,4 +1,6 @@
-module.exports = function(sequelize, DataTypes) {
+const candidateModel = require('./candidates')
+
+const userModel = function(sequelize, DataTypes) {
   return sequelize.define(
     'interviewer',
     {
@@ -21,3 +23,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   )
 }
+
+userModel.hasMany(candidateModel)
+
+module.exports = userModel

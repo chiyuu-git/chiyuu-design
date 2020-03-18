@@ -41,6 +41,5 @@ export default async function myFetch(
     console.log('Request Error: ', error)
   }
   result = response.json()
-  console.log('Request succeeded with JSON response', result)
   return result
 }

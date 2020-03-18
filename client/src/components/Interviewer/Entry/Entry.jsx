@@ -14,11 +14,9 @@ const Entry = (props) => {
   }
 
   const handelClick = (e) => {
-    console.log('1')
     const {name,phone} = form
-    loginAsync({name,phone})
+    props.loginAsync({name,phone})
     // loginAsync({...form})
-    login(name,phone)
   }
   
   return (
@@ -35,7 +33,7 @@ const Entry = (props) => {
         </div>
         <div className="form_group">
           <a 
-            to='/candidate/equipmentCheck' 
+            to='/interviewer/manage' 
             className='btn confirm_info'
             onClick={handelClick}>
               确定
@@ -50,5 +48,5 @@ const Entry = (props) => {
 
 export default connect(
   null,
-  {loginAsync,login}
+  {loginAsync}
 )(Entry); 

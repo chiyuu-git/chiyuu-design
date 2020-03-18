@@ -1,10 +1,11 @@
-import React from 'react';
+import React,{useRef} from 'react';
 
 import {NavLink} from 'react-router-dom'
 
 import './Manage.less'
 
 const Manage = () => {
+  const editBtn = useRef()
   return (
     <section className='manage_box' >
       <div className="m_box">
@@ -23,23 +24,6 @@ const Manage = () => {
             </a>
           </div>
         </header>
-{/*         <ul className="candidate_list">
-          <li className="list_header">
-            <span className="name">姓名</span>
-            <span className="phone">手机号码</span>
-            <span className="email">邮箱</span>
-            <span className="interview_time">面试时间</span>
-            <span className="interview_status">面试状态</span>
-          </li>
-          <li className="candidate_info">
-            <span className="name">张三</span>
-            <span className="phone">123456</span>
-            <span className="email">123@123.com</span>
-            <span className="interview_time">2020-1-1</span>
-            <span className="interview_status">未开始</span>
-            <a className="btn enter">进入房间</a>
-          </li>
-        </ul> */}
         <table className='candidate_table'>
           <thead>
             <tr className='table_header'>
@@ -53,12 +37,15 @@ const Manage = () => {
           </thead>
           <tbody>
             <tr className='table_row'>
-            <td>张三</td>
-            <td>123456</td>
-            <td>123@123</td>
-            <td>2020-1-1</td>
-            <td>未开始</td>
-            <td>进入房间</td>
+            <td><input type="text" defaultValue='张三'/></td>
+            <td><input type="text" defaultValue='123456'/></td>
+            <td><input type="text" defaultValue='123@123'/></td>
+            <td><input type="text" defaultValue='2010-4-4'/></td>
+            <td><input type="text" defaultValue='未开始'/></td>
+            <td>
+              <a className="table_btn" ref={editBtn} onClick={handleEditBtn}>编辑</a>
+              <a className="table_btn">进入房间</a>
+            </td>
             </tr>
           </tbody>
         </table>
