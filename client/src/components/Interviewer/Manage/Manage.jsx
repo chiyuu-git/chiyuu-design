@@ -1,11 +1,22 @@
-import React,{useRef} from 'react';
+import React,{useRef,useState,useEffect} from 'react';
 
 import {NavLink} from 'react-router-dom'
 
 import './Manage.less'
-
+import Row from './Row'
 const Manage = () => {
-  const editBtn = useRef()
+
+  useEffect(() => {
+
+  },[])
+  function handelBatch(){
+    
+  }
+
+  function handleAdd(){
+    
+  }
+
   return (
     <section className='manage_box' >
       <div className="m_box">
@@ -13,14 +24,14 @@ const Manage = () => {
           <div className="holder"></div>
           <div className="title">面试者管理</div>
           <div className="toolbar">
-            <a className="search">
-              <i className='iconfont icon-search'></i>
+            <a className="add" onClick={handleAdd}>
+              <i className='iconfont icon-add'></i>
             </a>
             <a className="import">
               <i className='iconfont icon-import'></i>
             </a>
-            <a className="sort">
-              <i className='iconfont icon-sort'></i>
+            <a className="batch" >
+              <i className='iconfont icon-batch'></i>
             </a>
           </div>
         </header>
@@ -36,17 +47,7 @@ const Manage = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className='table_row'>
-            <td><input type="text" defaultValue='张三'/></td>
-            <td><input type="text" defaultValue='123456'/></td>
-            <td><input type="text" defaultValue='123@123'/></td>
-            <td><input type="text" defaultValue='2010-4-4'/></td>
-            <td><input type="text" defaultValue='未开始'/></td>
-            <td>
-              <a className="table_btn" ref={editBtn} onClick={handleEditBtn}>编辑</a>
-              <a className="table_btn">进入房间</a>
-            </td>
-            </tr>
+            <Row/>
           </tbody>
         </table>
       </div>

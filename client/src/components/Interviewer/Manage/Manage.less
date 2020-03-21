@@ -35,52 +35,23 @@
           margin-left:5px;
           .iconfont{font-size: 25px;}
         }
-        .search{background-color: #ff0000;}
-        .import{background-color: #9266f9;}
-        .sort{background-color: #16c2c2;}
+        .add{background-color: #ff0000;}
+        .import,.export{background-color: #9266f9;}
+        .batch{background-color: #16c2c2;}
       }
     }
     .candidate_table{
-      .table_header{
+      text-align: center;
+      &>thead>.table_header{
         line-height:40px;
         border-collapse: collapse;
         th{
+          font-weight: bold;
           border: @border;
           border-top:transparent;
         }
         th:first-child{border-left:transparent}
         th:last-child{border-right:transparent}
-      }
-      .table_row{
-        line-height:50px;
-        text-align: center;
-        td{
-          padding:0 5px;
-          input{
-            text-align:center;
-          }
-        }
-        td:nth-child(1)>input{width:100px;}
-        td:nth-child(2)>input{width:150px;}
-        td:nth-child(3)>input{width:150px;}
-        td:nth-child(4)>input{width:150px;}
-        td:nth-child(5)>input{width:100px;}
-        td:last-child{width:200px;}
-        .table_btn{
-          display: inline-block;
-          width:80px;
-          padding:10px 0;
-          font-size:14px;
-          line-height:normal;
-          text-align:center;
-          cursor: pointer;
-          color:white;
-          background-color: @funcBtn;
-          margin-left:5px;
-        }
-      }
-      .editable{
-        input{border:@border;}
       }
     }
   }

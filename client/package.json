@@ -30,6 +30,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "antd": "^4.0.3",
     "codemirror": "^5.49.0",
     "js-audio-recorder": "^1.0.3",
     "react": "^16.9.0",

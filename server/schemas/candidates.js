@@ -1,4 +1,5 @@
-const userModel = require('./users')
+const usersModel = require('./users')
+
 
 const candidateModel = function(sequelize, DataTypes) {
   return sequelize.define(
@@ -29,13 +30,19 @@ const candidateModel = function(sequelize, DataTypes) {
         type:DataTypes.STRING(45),
         allowNull: false
       },
+       // It is possible to create foreign keys:
+       foreignKey: {
+        type: DataTypes.STRING(45),
+        references: {
+          model: 'interviewer',
+          key: 'pk',
+        }
+      },
     },
     { 
       freezeTableName: true,
     }
   )
 }
-
-candidateModel.belongsTo(userModel)
 
 module.exports = candidateModel

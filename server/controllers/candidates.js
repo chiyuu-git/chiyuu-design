@@ -1,15 +1,9 @@
 const Candidate = require('../modules/candidates.js')
 
 const getCandidateList = async function(ctx,next){
-  const userInfo = ctx.request.body
-  const pk = userInfo.name+userInfo.phone
+  const pk = ctx.params.id
   console.log(pk)
-  let result = await Candidate.getUserByPk(pk)
-  // 第一次登陆，帮他注册
-  if(result===null){
-    Object.assign(userInfo,{pk})
-    result = await Candidate.createUser(userInfo)
-  }
+  let result = await Candidate.getCandidateListByPk(pk)
   ctx.response.body = result
 }
 

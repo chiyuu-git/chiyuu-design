@@ -9,9 +9,13 @@ const createCandidate = async function(candidateInfo){
   return res 
 }
 
-const getCandidateByPk = async function(id) {
-  const userInfo = await CandidateModel.findByPk(id)
-  return userInfo // 返回数据
+const getCandidateListByPk = async function(pk) {
+  const candidateList = await CandidateModel.findAll({
+    where:{
+      pk
+    }
+  })
+  return candidateList
 }
 
 const updateCandidateById = async function(id,newInfo){
@@ -25,4 +29,5 @@ const updateCandidateById = async function(id,newInfo){
 
 module.exports =  {
   createCandidate,
+  getCandidateListByPk,
 }

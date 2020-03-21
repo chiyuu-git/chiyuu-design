@@ -1,5 +1,3 @@
-const candidateModel = require('./candidates')
-
 const userModel = function(sequelize, DataTypes) {
   return sequelize.define(
     'interviewer',
@@ -23,7 +21,5 @@ const userModel = function(sequelize, DataTypes) {
     }
   )
 }
-
-userModel.hasMany(candidateModel)
 
 module.exports = userModel
