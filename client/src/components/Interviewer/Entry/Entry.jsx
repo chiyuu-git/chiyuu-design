@@ -1,7 +1,8 @@
 import React ,{useState}from 'react';
 import {NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'; 
-import { loginAsync,login } from './EntryRedux';
+import { loginAsync } from './EntryRedux';
+import { loadCandidateListAsync } from '../InterviewerRedux';
 
 const Entry = (props) => {
   const [form,setForm] = useState({
@@ -16,7 +17,8 @@ const Entry = (props) => {
   const handelClick = (e) => {
     const {name,phone} = form
     props.loginAsync({name,phone})
-    // loginAsync({...form})
+    // 同时加载候选者名单，便于manage显示
+    props.loadCandidateListAsync({id:name+phone})
   }
   
   return (
@@ -32,12 +34,12 @@ const Entry = (props) => {
           <input type="text" name="phone" id='phone' onChange={handleChange}/>
         </div>
         <div className="form_group">
-          <a 
+          <NavLink 
             to='/interviewer/manage' 
             className='btn confirm_info'
             onClick={handelClick}>
               确定
-          </a>
+          </NavLink>
         </div>
       </div>
     </form>
@@ -48,5 +50,8 @@ const Entry = (props) => {
 
 export default connect(
   null,
-  {loginAsync}
+  {
+    loginAsync,
+    loadCandidateListAsync,
+  }
 )(Entry); 

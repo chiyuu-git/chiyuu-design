@@ -1,4 +1,5 @@
-import React,{useRef,useState} from 'react';
+import React,{useRef,useState,useEffect} from 'react';
+import {NavLink} from 'react-router-dom'
 
 import DatePicker from 'antd/es/date-picker' // 加载 JS
 import Select from 'antd/es/select' // 加载 JS
@@ -9,39 +10,53 @@ const { Option } = Select;
 
 import './Row.less'
 
-const Row = () => {
+const Row = (props) => {
+  // props
+  const {name,phone,email,date,time,status} = props
+  // hooks
   const editBtn = useRef()
   const tableRow = useRef()
+  const [info,setInfo] = useState({name,phone,email,date,time,status})
   const [editable,setEditable] = useState(false)
+
+  useEffect(() => {
+    // 当name,phone 其中一个为空的时候，editable
+    if(name==='' || phone==='') handleEditBtn()
+  },[])
 
   // Event handler
   function handleEditBtn(e){
-    setEditable(!editable)
     editBtn.current.classList.toggle('confirm_btn')
     tableRow.current.classList.toggle('editable')
-    if(!editable) editBtn.current.innerText = '编辑'
+    if(editable) editBtn.current.innerText = '编辑'
     else editBtn.current.innerText = '确定'
+    setEditable(!editable)
+    // 同步到数据库
+    if(editable){
+
+    }
   }
   function handleChange(value) {
-    console.log(`selected ${value}`);
+    console.log(`selected ${value}`)
   }
 
   return (
     <tr className='table_row' ref={tableRow}>
-      <td><input type="text" defaultValue='张三' disabled={!editable}/></td>
-      <td><input type="text" defaultValue='12345678910' disabled={!editable}/></td>
-      <td><input type="text" defaultValue='imperkings@outlook.com' disabled={!editable}/></td>
+      <td><input type="text" defaultValue={name} disabled={!editable}/></td>
+      <td><input type="text" defaultValue={phone} disabled={!editable}/></td>
+      <td><input type="text" defaultValue={email} disabled={!editable}/></td>
       <td><DatePicker 
-        defaultValue={moment('2015/01/01', 'YYYY/MM/DD')}
+        defaultValue={moment(date, 'YYYY/MM/DD')}
         suffixIcon=''
         size='small'
-        showTime
+        showTime={{defaultValue:moment(time, 'HH:mm:ss')}}
         disabled={!editable}
+        onChange={handleChange}
         />
       </td>
       <td>
         <Select 
-          defaultValue="未开始" 
+          defaultValue={status || 'notStart'}
           size='small' 
           onChange={handleChange}
           disabled={!editable}
@@ -53,10 +68,10 @@ const Row = () => {
       </td>
       <td>
         <a className="table_btn" ref={editBtn} onClick={handleEditBtn}>编辑</a>
-        <a className="table_btn">进入房间</a>
+        <NavLink className="table_btn" to='/interviewer/equipmentCheck'>进入房间</NavLink>
       </td>
     </tr>
-  );
-};
+  )
+}
 
 export default Row;

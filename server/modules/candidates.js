@@ -4,30 +4,30 @@ const CandidateModel = design.import('../schemas/candidates.js') // 用sequelize
 
 CandidateModel.sync({force:false})
 
-const createCandidate = async function(candidateInfo){
-  let res = await CandidateModel.create(candidateInfo)
-  return res 
-}
-
 const getCandidateListByPk = async function(pk) {
   const candidateList = await CandidateModel.findAll({
     where:{
-      pk
+      foreignKey:pk
     }
   })
   return candidateList
 }
 
-const updateCandidateById = async function(id,newInfo){
-  const userInfo = await CandidateModel.update(newInfo,{
+const updateCandidateById = async function(pk,newInfo){
+  const candidateInfo = await CandidateModel.update(newInfo,{
     where:{
-      id:id
+      pk
     }
   })
-  return userInfo
+  return candidateInfo
+}
+
+const createCandidate = async function(candidateInfo){
+  let res = await CandidateModel.create(candidateInfo)
+  return res 
 }
 
 module.exports =  {
-  createCandidate,
   getCandidateListByPk,
+  updateCandidateById,
 }

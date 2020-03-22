@@ -22,11 +22,15 @@ const candidateModel = function(sequelize, DataTypes) {
         type: DataTypes.STRING(45),
         allowNull: false
       },
-      interviewDate:{
-        type:DataTypes.DATE,
+      date:{
+        type:DataTypes.STRING(45),
         allowNull: false
       },
-      interviewStatus:{
+      time:{
+        type:DataTypes.STRING(45),
+        allowNull: false
+      },
+      status:{
         type:DataTypes.STRING(45),
         allowNull: false
       },

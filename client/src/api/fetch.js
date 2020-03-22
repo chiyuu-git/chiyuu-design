@@ -25,7 +25,9 @@ export default async function myFetch(
   try {
     switch(method){
       case 'GET':
-        response = await fetch(url)
+        console.log('GET',url)
+        response = await fetch(url,)
+      break
       case 'POST':
         response = await fetch(url, {
           method,
@@ -35,6 +37,7 @@ export default async function myFetch(
           body: query,
           mode:'cors'
         })
+      break
     }
   }
   catch (error) {
