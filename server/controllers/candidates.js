@@ -16,8 +16,17 @@ const updateCandidate = async function(ctx,next){
   ctx.response.body = result
 }
 
+const getInterviewerID = async function(ctx,next){
+  const pk = ctx.query.id
+  console.log('pk:',pk)
+  let result = await Candidate.getInterviewerByPk(pk)
+  console.log('result:',result.foreignKey)
+  ctx.response.body = {id:result.foreignKey}
+}
+
 
 module.exports = {
   getCandidateList,
   updateCandidate,
+  getInterviewerID,
 }

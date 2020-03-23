@@ -1,0 +1,48 @@
+@import '~assets/variate.less';
+
+.entry_box{
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .input_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 450px;
+    height:350px;
+    border:@border;
+    .form_group{
+      margin-left:30px;
+      margin-bottom: 20px;
+      .control_label{
+        display: inline-block;
+        width: 100px;
+        line-height: 42px;
+        padding: 0 15px;
+        text-align-last: justify;
+      }
+      input{
+        width: 200px;
+        height: 30px;
+        padding: 8px 5px 7px;
+        border:@border;
+        color:#34495e;
+        font-size:14px;
+        border-radius: 3px;
+        outline:0;
+      }
+      input:focus{
+        border:1px solid black;;
+      }
+      .confirm_info{
+        width: 200px;
+        margin-left:100px;
+        color:white;
+        background-color: @funcBtn;
+      }
+    }
+  }
+}
+
+

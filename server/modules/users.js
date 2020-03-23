@@ -9,8 +9,8 @@ const createUser = async function(userInfo){
   return res 
 }
 
-const getUserByPk = async function(id) {
-  const userInfo = await UserModel.findByPk(id)
+const getUserByPk = async function(pk) {
+  const userInfo = await UserModel.findByPk(pk)
   return userInfo // 返回数据
 }
 

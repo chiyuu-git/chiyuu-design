@@ -13,7 +13,7 @@ const Candidate = () => {
       <Header/>
       <div className="candidate_body">
     <Switch>
-      <Route exact path='/candidate' component={CandidateEntry}/>
+      <Route exact path='/' component={Room}/>
       <Route path='/candidate/login' component={CandidateEntry}/>
       <Route path='/candidate/equipmentCheck' component={EquipmentCheck}/>
       <Route path='/candidate/room' component={Room} />

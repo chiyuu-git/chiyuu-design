@@ -3,7 +3,6 @@ import React from 'react';
 import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
 
 import './Room.less'
-import './webRTC'
 
 
 import CodeTest from './CodeTest'
@@ -11,7 +10,9 @@ import UploadFile from './UploadFile'
 import EquipmentInfo from './EquipmentInfo'
 
 const Room = (props) => {
-  const targetID = '张三12345678910'
+  /* const targetID = props.match.params.targetID || props.location.query
+  console.log(targetID) */
+  const targetID = '高13724824476'
   console.log(targetID)
   return (
     <section className="room_box">

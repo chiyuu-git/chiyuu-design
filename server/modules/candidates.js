@@ -27,7 +27,20 @@ const createCandidate = async function(candidateInfo){
   return res 
 }
 
+
+// const getInterviewerByPk = async function(pk){
+//   const candidate = await CandidateModel.findOne({
+//     where:{name:'张三'}
+//   })
+//   return candidate 
+// }
+const getInterviewerByPk = async function(pk){
+  const candidate = await CandidateModel.findByPk(pk)
+  return candidate 
+}
+
 module.exports =  {
   getCandidateListByPk,
   updateCandidateById,
+  getInterviewerByPk,
 }

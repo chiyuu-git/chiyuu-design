@@ -8,6 +8,8 @@ const CandidateController = require('../controllers/candidates.js')
 router.post('/login',UserController.login)
 // 获取面试者的列表
 router.get('/candidateList',CandidateController.getCandidateList)
+// 获取 面试者的 面试官
+router.get('/interviewerID',CandidateController.getInterviewerID)
 
 router.post('/user/:id', UserController.getUserInfo) //用POST请求
 router.patch('/user/update/:id',UserController.updateUser) // 更新用户信息
