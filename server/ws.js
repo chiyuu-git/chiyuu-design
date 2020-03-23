@@ -98,7 +98,7 @@ module.exports =  (server) => {
             // list instead of just updating. It's horribly inefficient
             // but this is a demo. Don't do this in a real app.
             connect.username = msg.name;
-            sendUserListToAll();
+            // sendUserListToAll();
             sendToClients = false;  // We already sent the proper responses
             break;
         }

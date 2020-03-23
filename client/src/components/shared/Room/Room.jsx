@@ -3,16 +3,15 @@ import React from 'react';
 import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
 
 import './Room.less'
-import './webRTC'
 
+import './webRTC'
 
 import CodeTest from './CodeTest'
 import UploadFile from './UploadFile'
 import EquipmentInfo from './EquipmentInfo'
 
 const Room = (props) => {
-  const targetID = '张三12345678910'
-  console.log(targetID)
+
   return (
     <section className="room_box">
           <div className="answer_box">
@@ -23,7 +22,7 @@ const Room = (props) => {
                 <li className='tab'><NavLink to='/candidate/room/equipmentInfo' activeClassName='activeLink'>设备信息</NavLink></li>
               </ul>
               <Switch>
-                <Route exact path='/candidate/room' component={CodeTest}/>
+                <Route exact path='/' component={EquipmentInfo}/>
                 <Route path='/candidate/room/codeTest' component={CodeTest}/>
                 <Route path='/candidate/room/uploadFile' component={UploadFile} />
                 <Route path='/candidate/room/equipmentInfo' component={EquipmentInfo} />
@@ -33,7 +32,7 @@ const Room = (props) => {
           <div className="chat_box">
             <div className='video_box'>
               <div className='video_btn'>
-                <a className='icon_btn'><i className='iconfont icon-video'></i><span>视频通话</span></a>
+                <a className='icon_btn' id='inviteBtn'><i className='iconfont icon-video'></i><span>视频通话</span></a>
                 <i className='iconfont icon-interviewer'></i>
                 <a className='icon_btn'><i className='iconfont icon-audio'></i><span>语音通话</span></a>
               </div>

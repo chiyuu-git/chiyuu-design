@@ -21,7 +21,7 @@ var myPeerConnection = null;    // RTCPeerConnection
 var transceiver = null;         // RTCRtpTransceiver
 var webcamStream = null;        // MediaStream from webcam
 
-let targetUsername = '张三12345678910'
+let targetUsername = '高13724824476'
 
 function log(text) {
   var time = new Date();
@@ -47,7 +47,7 @@ function sendToServer(msg) {
 
 // NOTE:
 function setUsername() {
-  myUsername = '高13724824476'
+  myUsername = '张三12345678910'
 
   sendToServer({
     name: myUsername,
