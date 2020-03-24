@@ -4,13 +4,13 @@ import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
 
 import './Room.less'
 
-import './webRTC'
-
-import CodeTest from './CodeTest'
-import UploadFile from './UploadFile'
+import CodeTest from './CodeTest/CodeTest'
+import UploadFile from './UploadFile/UploadFile'
+import Chat from './Chat/Chat'
 import EquipmentInfo from './EquipmentInfo'
 
 const Room = (props) => {
+  
 
   return (
     <section className="room_box">
@@ -29,31 +29,7 @@ const Room = (props) => {
               </Switch>
             </BrowserRouter>
           </div>
-          <div className="chat_box">
-            <div className='video_box'>
-              <div className='video_btn'>
-                <a className='icon_btn' id='inviteBtn'><i className='iconfont icon-video'></i><span>视频通话</span></a>
-                <i className='iconfont icon-interviewer'></i>
-                <a className='icon_btn'><i className='iconfont icon-audio'></i><span>语音通话</span></a>
-              </div>
-              <div className='video_tip'>发起聊天前，建议先进行检测设备</div>
-              <div className='video_toolbar'><i className='iconfont icon-fullscreen'></i></div>
-            </div>
-            <div className='interviewer_info'>
-              <p>面试官 - 许可<span className='status'>离线</span></p>
-              <p>
-                <i className='iconfont icon-phone'></i>13724824476|
-                <i className='iconfont icon-email'></i>邮箱
-              </p>
-            </div>
-            <div className='text_discuss'>
-              <div className='discuss_list'></div>
-              <div className='discuss_toolbar'>
-                <textarea placeholder="请输入聊天内容"></textarea>
-                <p><a>常见问题</a><a>按回车键发送</a></p>
-              </div>
-            </div>
-          </div>
+          <Chat/>
         </section>
   );
 };
