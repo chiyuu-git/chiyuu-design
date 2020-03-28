@@ -41,7 +41,7 @@ const EquipmentCheck = (props) => {
   function startRecord(){
     setRecording(true)
     recorder.onprogress = (params) => {
-      // icon 总共宽 29.6
+      // icon 总共宽 29.6，控制音量动画
       const clipWidth = (1-params.vol*0.01)*38
       recordCover.current.style.clipPath = `inset(0px ${clipWidth}px 0px 0px)`
     }

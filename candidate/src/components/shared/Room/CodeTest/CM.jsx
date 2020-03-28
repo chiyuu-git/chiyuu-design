@@ -1,4 +1,4 @@
-import React,{useRef,useEffect} from 'react';
+import React,{useRef,useEffect,useContext} from 'react';
 
 import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
@@ -22,8 +22,24 @@ import 'codemirror/addon/edit/closebrackets'
 // 当前行背景高亮
 import 'codemirror/addon/selection/active-line'
 
+import {ConnectionContext} from '../Room'
+import {sendToServer} from '../Chat/webSocket'
+
 const CM = () => {
   const cm_placeholder = useRef(null)
+  const connection = useContext(ConnectionContext)
+  // NOTE:point
+  let myUsername = '高13724824476'
+  let targetUsername = '张三12345678910'
+
+  connection.addEventListener('message',(evt) => {
+    const msg = JSON.parse(evt.data);
+    switch(msg.type) {
+      case 'codeChange':
+        console.log(msg.changeObj)
+        break
+    }
+  })
 
   useEffect(()=>{
     const commonOptions = {
@@ -46,7 +62,19 @@ const CM = () => {
       ...commonOptions,
       styleActiveLine:true,
     })
+    editor.on('change',handleChange)
   },[])
+
+  function handleChange(instance,changeObj){
+    sendToServer({
+      changeObj,
+      type: "codeChange",
+      name: myUsername,
+      // target: targetUsername,
+      date: Date.now(),
+    })
+  }
+
   return (
     <textarea ref={cm_placeholder}>
     </textarea>

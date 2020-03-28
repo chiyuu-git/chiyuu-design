@@ -10,11 +10,7 @@ import './Frame.less'
 const Frame = () => {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path='/' component={Candidate}/>
-        <Route path='/interviewer' component={Interviewer}/>
-        <Route path='/candidate' component={Candidate}/>
-      </Switch>
+      <Candidate/>
     </BrowserRouter>
   );
 };
