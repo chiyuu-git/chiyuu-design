@@ -1,13 +1,28 @@
-import React, { useEffect,useRef } from 'react';
+import React, { useEffect,useRef,useContext } from 'react';
+
+import webRTC from './webRTC'
+import textChat from './textChat'
+import {ConnectionContext} from '../Room'
+
 import './Chat.less'
-import './webRTC'
 
 const Chat = () => {
   const chatRecorder = useRef()
+
+  const connection = useContext(ConnectionContext)
+
+  // NOTE:point
+  let myUsername = '高13724824476'
+  let targetUsername = '张三12345678910'
+
+  webRTC(connection,myUsername,targetUsername)
+  textChat(connection,myUsername,targetUsername)
+
   useEffect(() => {
     const maxHeight = getComputedStyle(chatRecorder.current).height
     chatRecorder.current.style.maxHeight = maxHeight
   },[])
+
   return (
     <div className="chat_box">
       <div className='video_box'>
@@ -41,4 +56,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default Chat

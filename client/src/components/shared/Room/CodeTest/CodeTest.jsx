@@ -1,18 +1,46 @@
-import React from 'react';
+import React,{useEffect,useContext} from 'react';
 
 import CM from './CM'
-
-
 import './CodeTest.less'
 
-const CodeTest = () => {
-  
+import {ConnectionContext} from '../Room'
+import {sendToServer} from '../Chat/webSocket'
+
+const CodeTest = (props) => {
+
+  const connection = useContext(ConnectionContext)
+  // NOTE:point
+  let myUsername = '高13724824476'
+  let targetUsername = '张三12345678910'
+
+  connection.addEventListener('message',(evt) => {
+    const msg = JSON.parse(evt.data);
+    switch(msg.type) {
+      case 'testInfo':
+        console.log(msg.quest)
+        break
+    }
+  })
+
+  function handleChange(evt){
+    const quest = evt.target.value
+    console.log(quest)
+    sendToServer({
+      quest,
+      type: "testInfo",
+      name: myUsername,
+      // target: targetUsername,
+      date: Date.now(),
+    })
+  }
+
+
   return (
     <section className='code_test_box'>
       <div className="test_box">
         <header>任务</header>
         <div className="test_info">
-          <div className="placeholder">面试官提出的问题将出现在这里</div>
+          <textarea placeholder='面试官提出的问题将出现在这里' onChange={handleChange} ></textarea>
         </div>
       </div>
       <div className="code_box">
@@ -35,7 +63,7 @@ const CodeTest = () => {
           <div className="placeholder"></div>
           <a className='fullscreen_btn'><i className='iconfont icon-fullscreen'></i></a>
         </div>
-        <CM/>
+        <CM />
         <div className="code_result">
           <div className="grow_wrap"><a className='result_btn'>运行结果<i className='iconfont icon-arrow_up'></i></a></div>
           <a className='btn run_btn'>提交运行</a>
@@ -45,4 +73,4 @@ const CodeTest = () => {
   );
 }
 
-export default CodeTest;
+export default CodeTest

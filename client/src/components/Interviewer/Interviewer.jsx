@@ -16,7 +16,7 @@ const Interviewer = () => {
       <Header/>
       <div className="interviewer_body">
     <Switch>
-      <Route exact path='/' component={Room}/>
+      <Route exact path='/' component={Manage}/>
       <Route path='/interviewer/login' component={Entry}/>
       <Route path='/interviewer/manage' component={Manage}/>
       <Route path='/interviewer/equipmentCheck/:targetID' component={EquipmentCheck}/>

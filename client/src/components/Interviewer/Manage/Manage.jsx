@@ -60,7 +60,7 @@ const Manage = (props) => {
     fileInput.current.click()
   }
   function handleBatch(){
-    
+    // 批量删除 // 导出功能
   }
   
   return (
@@ -70,7 +70,7 @@ const Manage = (props) => {
           <div className="holder"></div>
           <div className="title">面试者管理</div>
           <div className="toolbar">
-            <a className="add" onClick={handleAdd}>
+            <a className="add" onClick={handleAdd} title='新建'>
               <i className='iconfont icon-add'></i>
             </a>
             <input type="file" ref={fileInput} style={{display:'none'}} onChange={handleFile}/>
