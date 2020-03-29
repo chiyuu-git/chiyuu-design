@@ -8,10 +8,11 @@ import {sendToServer} from '../Chat/webSocket'
 
 const CodeTest = (props) => {
 
-  const connection = useContext(ConnectionContext)
+  const {connection,candidateInfo,interviewerInfo} = useContext(ConnectionContext)
+
   // NOTE:point
-  let myUsername = '高13724824476'
-  let targetUsername = '张三12345678910'
+  let myID = interviewerInfo.name+interviewerInfo.phone
+  let targetID = candidateInfo.name+candidateInfo.phone
 
   connection.addEventListener('message',(evt) => {
     const msg = JSON.parse(evt.data);
@@ -28,8 +29,8 @@ const CodeTest = (props) => {
     sendToServer({
       quest,
       type: "testInfo",
-      name: myUsername,
-      // target: targetUsername,
+      name: myID,
+      // target: targetID,
       date: Date.now(),
     })
   }

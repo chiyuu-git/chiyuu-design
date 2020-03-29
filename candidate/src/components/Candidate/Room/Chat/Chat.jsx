@@ -3,19 +3,21 @@ import React, { useEffect,useRef,useContext } from 'react';
 import webRTC from './webRTC'
 import textChat from './textChat'
 import {ConnectionContext} from '../../Candidate'
+// import adapter from 'webrtc-adapter';
 
 import './Chat.less'
 
 const Chat = () => {
   const chatRecorder = useRef()
+
   const {context} = useContext(ConnectionContext)
   const {connection,myID,targetID,targetInfo} = context
   const {name,phone} = targetInfo
 
-  webRTC(connection,myID,targetID)
-  textChat(connection,myID,targetID)
-
   useEffect(() => {
+    webRTC(connection,myID,targetID)
+    textChat(connection,myID,targetID)
+    
     const maxHeight = getComputedStyle(chatRecorder.current).height
     chatRecorder.current.style.maxHeight = maxHeight
   },[])

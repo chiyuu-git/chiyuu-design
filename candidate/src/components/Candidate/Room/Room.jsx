@@ -28,7 +28,7 @@ const Room = (props) => {
             <li className='tab'><NavLink to='/candidate/room/equipmentInfo' activeClassName='activeLink'>设备信息</NavLink></li>
           </ul>
           <Switch>
-            <Route exact path='/' component={EquipmentInfo}/>
+            <Route exact path='/candidate/room' component={CodeTest}/>
             <Route path='/candidate/room/codeTest' component={CodeTest}/>
             <Route path='/candidate/room/uploadFile' component={UploadFile} />
             <Route path='/candidate/room/equipmentInfo' component={EquipmentInfo} />

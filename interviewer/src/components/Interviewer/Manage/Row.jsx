@@ -68,7 +68,7 @@ const Row = (props) => {
       </td>
       <td>
         <a className="table_btn" ref={editBtn} onClick={handleEditBtn}>编辑</a>
-        <NavLink className="table_btn" to={`/interviewer/equipmentCheck/${name+phone}`}>进入房间</NavLink>
+        <NavLink className="table_btn" to={`/interviewer/room/${JSON.stringify(info)}`}>进入房间</NavLink>
       </td>
     </tr>
   )

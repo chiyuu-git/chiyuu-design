@@ -62,6 +62,10 @@ const EquipmentCheck = (props) => {
     console.log('播放录音')
     setNotStart(false)
     recorder.play()
+    // 播放结束后改变图形
+    setTimeout(() => {
+      setNotStart(true)
+    },recorder.duration*1000)
   }
 
   function stopStream(){
@@ -73,13 +77,11 @@ const EquipmentCheck = (props) => {
     <section className='equipmentCheck_box'>
       <div className="check_box">
         <header className="check_header">
-          <div className="room_info">房间号:12345</div>
           <div className="title">通讯设备检测</div>
           <div className="holder"></div>
         </header>
         <div className="check_body">
           <div className="tips">
-            <p className="welcome">name,欢迎参加XX在线面试</p>
             <p className="direction">请允许本网页对摄像头和麦克疯的使用权限，并确保通讯设备的正常使用</p>
           </div>
           <div className="audio_check">
@@ -126,7 +128,7 @@ const EquipmentCheck = (props) => {
 
             </video>
           </div>
-          <NavLink to={`/interviewer/room/${targetID}`} className='btn confirm_info' onClick={stopStream}>确定</NavLink>
+          <NavLink to={`/interviewer/manage`} className='btn confirm_info' onClick={stopStream}>确定</NavLink>
         </div>
       </div>
     </section>

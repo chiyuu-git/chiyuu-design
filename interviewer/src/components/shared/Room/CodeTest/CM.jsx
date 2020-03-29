@@ -27,10 +27,11 @@ import {sendToServer} from '../Chat/webSocket'
 
 const CM = () => {
   const cm_placeholder = useRef(null)
-  const connection = useContext(ConnectionContext)
+  const {connection,candidateInfo,interviewerInfo} = useContext(ConnectionContext)
+
   // NOTE:point
-  let myUsername = '高13724824476'
-  let targetUsername = '张三12345678910'
+  let myID = interviewerInfo.name+interviewerInfo.phone
+  let targetID = candidateInfo.name+candidateInfo.phone
 
   connection.addEventListener('message',(evt) => {
     const msg = JSON.parse(evt.data);
@@ -40,6 +41,16 @@ const CM = () => {
         break
     }
   })
+  
+  function handleChange(instance,changeObj){
+    sendToServer({
+      changeObj,
+      type: "codeChange",
+      name: myID,
+      // target: targetID,
+      date: Date.now(),
+    })
+  }
 
   useEffect(()=>{
     const commonOptions = {
@@ -65,15 +76,7 @@ const CM = () => {
     editor.on('change',handleChange)
   },[])
 
-  function handleChange(instance,changeObj){
-    sendToServer({
-      changeObj,
-      type: "codeChange",
-      name: myUsername,
-      // target: targetUsername,
-      date: Date.now(),
-    })
-  }
+
 
   return (
     <textarea ref={cm_placeholder}>

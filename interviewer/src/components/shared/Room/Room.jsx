@@ -1,6 +1,7 @@
 import React,{createContext} from 'react';
-
 import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
+import {connect} from 'react-redux'
+
 import CodeTest from './CodeTest/CodeTest'
 import UploadFile from './UploadFile/UploadFile'
 import Chat from './Chat/Chat'
@@ -10,29 +11,28 @@ import './Room.less'
 
 import wsCreator from './Chat/webSocket'
 
-// NOTE:point，chat.jsx cm.jsx
-let myUsername = '高13724824476'
-let targetUsername = '张三12345678910'
-const connection = wsCreator(myUsername)
-
-export const ConnectionContext = new createContext(connection)
+export const ConnectionContext = new createContext(null)
 
 const Room = (props) => {
+  const candidateInfo = JSON.parse(props.match.params.info)
+  const interviewerInfo = props.interviewerInfo
+  const connection = wsCreator(interviewerInfo.name+interviewerInfo.phone)
+
   return (
-    <ConnectionContext.Provider value={connection}>
+    <ConnectionContext.Provider value={{connection,candidateInfo,interviewerInfo}}>
       <section className="room_box">
         <div className="answer_box">
           <BrowserRouter>
             <ul className='nav'>
-              <li className='tab'><NavLink to='/candidate/room/codeTest' activeClassName='activeLink'>代码考核</NavLink></li>
-              <li className='tab'><NavLink to='/candidate/room/uploadFile' activeClassName='activeLink'>文件演示</NavLink></li>
-              <li className='tab'><NavLink to='/candidate/room/equipmentInfo' activeClassName='activeLink'>设备信息</NavLink></li>
+              <li className='tab'><NavLink to='/interviewer/room/codeTest' activeClassName='activeLink'>代码考核</NavLink></li>
+              <li className='tab'><NavLink to='/interviewer/room/uploadFile' activeClassName='activeLink'>文件演示</NavLink></li>
+              <li className='tab'><NavLink to='/interviewer/room/equipmentInfo' activeClassName='activeLink'>设备信息</NavLink></li>
             </ul>
             <Switch>
-              <Route exact path='/' component={CodeTest}/>
-              <Route path='/candidate/room/codeTest' component={CodeTest}/>
-              <Route path='/candidate/room/uploadFile' component={UploadFile} />
-              <Route path='/candidate/room/equipmentInfo' component={EquipmentInfo} />
+              <Route exact path='/interviewer/room' component={CodeTest}/>
+              <Route path='/interviewer/room/codeTest' component={CodeTest}/>
+              <Route path='/interviewer/room/uploadFile' component={UploadFile} />
+              <Route path='/interviewer/room/equipmentInfo' component={EquipmentInfo} />
             </Switch>
           </BrowserRouter>
         </div>
@@ -42,4 +42,8 @@ const Room = (props) => {
   );
 };
 
-export default Room;
+export default connect(
+  state=>({
+    interviewerInfo:state.interviewer.interviewerInfo
+  })
+)(Room);

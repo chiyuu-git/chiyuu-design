@@ -20,7 +20,7 @@ const CandidateEntry = (props) => {
     const targetID = targetInfo.pk
     const connection = wsCreator(myID)
     setContext({connection,myID,myName,targetID,targetInfo})
-    props.history.push('/candidate/equipmentCheck')
+    props.history.push('/candidate/room')
   }
   return (
     <section className='entry_box'>
