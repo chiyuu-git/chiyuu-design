@@ -1,16 +1,15 @@
-import React,{useState,useRef,useEffect} from 'react';
+import React,{useState,useRef,useEffect,useContext} from 'react';
 import {NavLink} from 'react-router-dom'
 import './EquipmentCheck.less'
 
 import Recorder from 'js-audio-recorder';
 
-
-// let recorder = 
-
+import {ConnectionContext} from '../Candidate'
 
 const EquipmentCheck = (props) => {
-  const targetID = props.match.params.targetID
   // hooks
+  const {context} = useContext(ConnectionContext)
+  const {myName} = context
   const video = useRef()
   const recordCover = useRef()
 
@@ -25,6 +24,7 @@ const EquipmentCheck = (props) => {
 
   const [stream,setStream] = useState()
 
+  // 视频
   useEffect(() => {
     const constraints = { video: true }
     navigator.mediaDevices.getUserMedia(constraints)
@@ -38,6 +38,7 @@ const EquipmentCheck = (props) => {
     .catch(function(err) { console.log(err.name + ": " + err.message); }); // 总是在最后检查错误
   },[])
 
+  // 录音
   function startRecord(){
     setRecording(true)
     recorder.onprogress = (params) => {
@@ -57,13 +58,15 @@ const EquipmentCheck = (props) => {
     recordCover.current.style.clipPath = ''
     console.log('录音结束')
   }
-
   function playRecord(){
     console.log('播放录音')
     setNotStart(false)
     recorder.play()
+    // 播放结束后改变图形
+    setTimeout(() => {
+      setNotStart(true)
+    },recorder.duration*1000)
   }
-
   function stopStream(){
     // 停止流
     stream.getTracks()[0].stop()
@@ -73,13 +76,12 @@ const EquipmentCheck = (props) => {
     <section className='equipmentCheck_box'>
       <div className="check_box">
         <header className="check_header">
-          <div className="room_info">房间号:12345</div>
           <div className="title">通讯设备检测</div>
           <div className="holder"></div>
         </header>
         <div className="check_body">
           <div className="tips">
-            <p className="welcome">name,欢迎参加XX在线面试</p>
+            <p className="welcome">{myName},欢迎参加XX在线面试</p>
             <p className="direction">请允许本网页对摄像头和麦克疯的使用权限，并确保通讯设备的正常使用</p>
           </div>
           <div className="audio_check">
@@ -126,7 +128,7 @@ const EquipmentCheck = (props) => {
 
             </video>
           </div>
-          <NavLink to={`/interviewer/room/${targetID}`} className='btn confirm_info' onClick={stopStream}>确定</NavLink>
+          <NavLink to={`/candidate/room`} className='btn confirm_info' onClick={stopStream}>确定</NavLink>
         </div>
       </div>
     </section>

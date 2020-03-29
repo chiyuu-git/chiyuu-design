@@ -2,7 +2,7 @@
 // action-types
 const GET_INTERVIEWER_ID = 'GET_INTERVIEWER_ID'; 
 
-import {reqInterviewerID} from 'api'
+
 
 // actionCreator
 // 异步`action creator`(返回一个函数)

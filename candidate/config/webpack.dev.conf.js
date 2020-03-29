@@ -19,7 +19,7 @@ module.exports = merge.smart(baseWebpackConfig, {
     inline: true,// 设置为true，当源文件改变时会自动刷新页面
     hot: true,// 模块热更新，取决于HotModuleReplacementPlugin
     host: '127.0.0.1',// 设置默认监听域名，如果省略，默认为“localhost”
-    port: 8080,// 设置默认监听端口，如果省略，默认为“8080”
+    port: 8888,// 设置默认监听端口，如果省略，默认为“8080”
     contentBase: './dist',
     proxy: {
       '/api': {
@@ -45,7 +45,7 @@ module.exports = merge.smart(baseWebpackConfig, {
     alias: {
       assets: path.resolve(__dirname, '../src/assets'),
       shared: path.resolve(__dirname, '../src/components/shared'),
-      api: path.resolve(__dirname, '../src/api')
+      api: path.resolve(__dirname, '../src/api'),
     }
   },
 })

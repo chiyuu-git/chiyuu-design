@@ -1,4 +1,5 @@
 const Candidate = require('../modules/candidates.js')
+const User = require('../modules/users.js')
 
 const getCandidateList = async function(ctx,next){
   const pk = ctx.query.id
@@ -10,23 +11,21 @@ const getCandidateList = async function(ctx,next){
 const updateCandidate = async function(ctx,next){
   const pk = ctx.body.id
   const newInfo = ctx.body.newInfo
-  console.log('pk:',pk)
-  console.log('newInfo:',newInfo)
   let result = await Candidate.updateCandidateById(pk)
   ctx.response.body = result
 }
 
-const getInterviewerID = async function(ctx,next){
+const getInterviewerInfo = async function(ctx,next){
   const pk = ctx.query.id
-  console.log('pk:',pk)
-  let result = await Candidate.getInterviewerByPk(pk)
-  console.log('result:',result.foreignKey)
-  ctx.response.body = {id:result.foreignKey}
+  let candidateInfo = await Candidate.getInterviewerByPk(pk)
+  let result = await User.getUserByPk(candidateInfo.foreignKey)
+  // 只需要返回name即可，因为ws只通过pk识别，name用于展示
+  ctx.response.body = result
 }
 
 
 module.exports = {
   getCandidateList,
   updateCandidate,
-  getInterviewerID,
+  getInterviewerInfo,
 }

@@ -2,21 +2,18 @@ import React, { useEffect,useRef,useContext } from 'react';
 
 import webRTC from './webRTC'
 import textChat from './textChat'
-import {ConnectionContext} from '../Room'
+import {ConnectionContext} from '../../Candidate'
 
 import './Chat.less'
 
 const Chat = () => {
   const chatRecorder = useRef()
+  const {context} = useContext(ConnectionContext)
+  const {connection,myID,targetID,targetInfo} = context
+  const {name,phone} = targetInfo
 
-  const connection = useContext(ConnectionContext)
-
-  // NOTE:point
-  let myUsername = '高13724824476'
-  let targetUsername = '张三12345678910'
-
-  webRTC(connection,myUsername,targetUsername)
-  textChat(connection,myUsername,targetUsername)
+  webRTC(connection,myID,targetID)
+  textChat(connection,myID,targetID)
 
   useEffect(() => {
     const maxHeight = getComputedStyle(chatRecorder.current).height
@@ -39,10 +36,9 @@ const Chat = () => {
         </div>
       </div>
       <div className='interviewer_info'>
-        <p>面试官 - 许可<span className='status'>离线</span></p>
+        <p>面试官 - {name}<span className='status'>离线</span></p>
         <p>
-          <i className='iconfont icon-phone'></i>13724824476|
-          <i className='iconfont icon-email'></i>邮箱
+          <i className='iconfont icon-phone'></i>{phone}
         </p>
       </div>
       <div className='text_chat'>

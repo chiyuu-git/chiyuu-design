@@ -3,15 +3,13 @@ import React,{useEffect,useContext} from 'react';
 import CM from './CM'
 import './CodeTest.less'
 
-import {ConnectionContext} from '../Room'
+import {ConnectionContext} from '../../Candidate'
 import {sendToServer} from '../Chat/webSocket'
 
 const CodeTest = (props) => {
 
-  const connection = useContext(ConnectionContext)
-  // NOTE:point
-  let myUsername = '高13724824476'
-  let targetUsername = '张三12345678910'
+  const {context} = useContext(ConnectionContext)
+  const {connection,myID,targetID} = context
 
   connection.addEventListener('message',(evt) => {
     const msg = JSON.parse(evt.data);
@@ -28,7 +26,7 @@ const CodeTest = (props) => {
     sendToServer({
       quest,
       type: "testInfo",
-      name: myUsername,
+      name: myID,
       // target: targetUsername,
       date: Date.now(),
     })
