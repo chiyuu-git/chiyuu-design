@@ -9,7 +9,11 @@ import Recorder from 'js-audio-recorder';
 
 
 const EquipmentCheck = (props) => {
-  const targetID = props.match.params.targetID
+  const candidateInfo = props.location.state
+  const path = {
+    pathname:'/interviewer/manage',
+    state:candidateInfo
+  }
   // hooks
   const video = useRef()
   const recordCover = useRef()
@@ -128,7 +132,7 @@ const EquipmentCheck = (props) => {
 
             </video>
           </div>
-          <NavLink to={`/interviewer/manage`} className='btn confirm_info' onClick={stopStream}>确定</NavLink>
+          <NavLink to={path} className='btn confirm_info' onClick={stopStream}>确定</NavLink>
         </div>
       </div>
     </section>

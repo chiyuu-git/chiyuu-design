@@ -17,10 +17,8 @@ const updateCandidate = async function(ctx,next){
 
 const getInterviewerInfo = async function(ctx,next){
   const pk = ctx.query.id
-  let candidateInfo = await Candidate.getInterviewerByPk(pk)
-  let result = await User.getUserByPk(candidateInfo.foreignKey)
-  // 添加id，却别服务端和客户端
-  result.id = result.pk
+  const candidateInfo = await Candidate.getInterviewerByPk(pk)
+  const result = await User.getUserByPk(candidateInfo.foreignKey)
   ctx.response.body = result
 }
 

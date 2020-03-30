@@ -2,13 +2,14 @@ const User = require('../modules/users.js')
 const login = async function(ctx,next){
   const userInfo = ctx.request.body
   const pk = userInfo.name+userInfo.phone
-  console.log(pk)
+  console.log('pk:',pk)
   let result = await User.getUserByPk(pk)
   // 第一次登陆，帮他注册
   if(result===null){
     Object.assign(userInfo,{pk})
     result = await User.createUser(userInfo)
   }
+  result.id = result.pk
   ctx.response.body = result
 }
 const getUserInfo = async function (ctx, next){

@@ -19,7 +19,7 @@ const Room = (props) => {
   const interviewerInfo = props.interviewerInfo
   const connection = wsCreator(interviewerInfo.name+interviewerInfo.phone)
 
-  return (
+  return props.interviewerInfo===null?null:(
     <ConnectionContext.Provider value={{connection,candidateInfo,interviewerInfo}}>
       <section className="room_box">
         <div className="answer_box">

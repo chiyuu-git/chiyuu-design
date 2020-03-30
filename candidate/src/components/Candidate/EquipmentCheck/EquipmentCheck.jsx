@@ -9,7 +9,7 @@ import {ConnectionContext} from '../Candidate'
 const EquipmentCheck = (props) => {
   // hooks
   const {context} = useContext(ConnectionContext)
-  console.log(context)
+  
   const video = useRef()
   const recordCover = useRef()
 

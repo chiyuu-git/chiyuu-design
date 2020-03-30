@@ -11,7 +11,7 @@ const CandidateEntry = (props) => {
   
   const {context,setContext} = useContext(ConnectionContext)
   
-  async function handleClick(){
+ async function handleClick(){
 
     const candidateInfo = {
       id:user.value+phone.value,
@@ -19,6 +19,7 @@ const CandidateEntry = (props) => {
       phone:phone.value
     }
     const interviewerInfo = await reqInterviewerInfo({id:candidateInfo.id})
+    interviewerInfo.id = interviewerInfo.pk
     const connection = wsCreator(candidateInfo.id)
     const context = {connection,candidateInfo,interviewerInfo}
     setContext(context)

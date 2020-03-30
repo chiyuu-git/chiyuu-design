@@ -18,6 +18,7 @@ const Row = (props) => {
   const tableRow = useRef()
   const [info,setInfo] = useState({name,phone,email,date,time,status})
   const [editable,setEditable] = useState(false)
+  // 如果已经检测过了，直接去room，否则去检测
   const path = {
     pathname:'/interviewer/room',
     state:info

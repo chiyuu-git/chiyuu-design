@@ -1,8 +1,26 @@
 import React from 'react';
+import {withRouter} from 'react-router'
+import {connect} from 'react-redux'
 import logo from 'assets/image/logo.png'
 import './Header.less'
 
-const Header = () => {
+import {login} from '../InterviewerRedux'
+
+const Header = (props) => {
+
+  // 登陆 持久化
+  const interviewerInfo = JSON.parse(sessionStorage.getItem('interviewerInfo'))
+  if(interviewerInfo ){
+    props.login(interviewerInfo)
+    // 已登录且已经检测
+    if(props.location.pathname ==='/'
+      // && props.location.pathname !=='/interviewer/manage'
+      // && props.location.pathname !=='/interviewer/room'
+    ){
+      props.history.push('/interviewer/manage')
+    }
+  }
+
   return (
     <header className="layout_header">
       <div className='layout_left'>
@@ -19,4 +37,9 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default connect(
+  null,
+  {
+    login
+  }
+)(withRouter(Header));

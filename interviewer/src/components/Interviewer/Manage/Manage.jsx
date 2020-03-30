@@ -7,8 +7,7 @@ import './Manage.less'
 import Row from './Row'
 const Manage = (props) => {
   // props
-  const {name,phone} = props.interviewerInfo
-  const id = name + phone
+  const {id} = props.interviewerInfo
   // hooks
   const fileInput = useRef()
   // name和phone不能为空，且id不能相同
@@ -28,13 +27,11 @@ const Manage = (props) => {
 
   // NOTE:调试用，临时
   useEffect(() => {
-    props.loadCandidateListAsync({id})
+    props.loadCandidateListAsync({id}).then((result) => {
+      setCandidateList([...candidateList,...result])
+    })
   },[])
 
-  useEffect(() => {
-    setCandidateList([...candidateList,...props.candidateList])
-  },[props.candidateList])
-  
   function handleAdd(){
     setCandidateList([...candidateList,{
       name:'',phone:'',email:'',
@@ -63,7 +60,7 @@ const Manage = (props) => {
     // 批量删除 // 导出功能
   }
   
-  return (
+  return props.candidateList.length===0?null:(
     <section className='manage_box' >
       <div className="m_box">
         <header className="m_header">

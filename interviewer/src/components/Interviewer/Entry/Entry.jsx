@@ -1,8 +1,9 @@
-import React ,{useState}from 'react';
+import React ,{useState,useEffect}from 'react';
 import {NavLink} from 'react-router-dom'
 import { connect } from 'react-redux'; 
-import { loginAsync } from './EntryRedux';
-import { loadCandidateListAsync } from '../InterviewerRedux';
+import { loginAsync,login,loadCandidateListAsync} from '../InterviewerRedux';
+
+import './Entry.less'
 
 const Entry = (props) => {
   const [form,setForm] = useState({
@@ -16,10 +17,15 @@ const Entry = (props) => {
 
   const handelClick = (e) => {
     const {name,phone} = form
+    const id = name+phone
     props.loginAsync({name,phone})
+    // 同时保存到session storage中
+    sessionStorage.setItem('interviewerInfo',JSON.stringify({id,name,phone}))
     // 同时加载候选者名单，便于manage显示
     props.loadCandidateListAsync({id:name+phone})
   }
+
+
   
   return (
     <section className='entry_box'>
@@ -51,6 +57,7 @@ const Entry = (props) => {
 export default connect(
   null,
   {
+    login,
     loginAsync,
     loadCandidateListAsync,
   }

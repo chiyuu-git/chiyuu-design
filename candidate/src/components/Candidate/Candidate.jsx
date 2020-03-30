@@ -20,12 +20,12 @@ const Candidate = (props) => {
       <section className='candidate_box'>
         <Header/>
         <div className="candidate_body">
-      <Switch>
-        <Route exact path='/' component={CandidateEntry}/>
-        <Route path='/candidate/login' component={CandidateEntry}/>
-        <Route path='/candidate/equipmentCheck' component={EquipmentCheck}/>
-        <Route path='/candidate/room' component={Room} />
-      </Switch>
+          <Switch>
+            <Route exact path='/' component={CandidateEntry}/>
+            <Route path='/candidate/login' component={CandidateEntry}/>
+            <Route path='/candidate/equipmentCheck' component={EquipmentCheck}/>
+            <Route path='/candidate/room' component={Room} />
+          </Switch>
         </div>
         <Footer/>
       </section>

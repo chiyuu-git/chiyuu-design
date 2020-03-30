@@ -16,8 +16,9 @@ const Chat = () => {
   let targetID = candidateInfo.name+candidateInfo.phone
   
   useEffect(() => {
-    webRTC(connection,interviewerInfo.name,targetID)
-    textChat(connection,interviewerInfo.name,targetID)
+    // 只能接受ID，原因暂时不想查了
+    webRTC(connection,interviewerInfo.id,targetID)
+    textChat(connection,interviewerInfo.id,targetID)
 
     const maxHeight = getComputedStyle(chatRecorder.current).height
     chatRecorder.current.style.maxHeight = maxHeight
