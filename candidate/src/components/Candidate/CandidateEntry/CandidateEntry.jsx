@@ -21,7 +21,7 @@ const CandidateEntry = (props) => {
     const interviewerInfo = await reqInterviewerInfo({id:candidateInfo.id})
     interviewerInfo.id = interviewerInfo.pk
     const connection = wsCreator(candidateInfo.id)
-    const context = {connection,candidateInfo,interviewerInfo}
+    const context = {connection,candidateInfo,interviewerInfo,equipmentStatus:false}
     setContext(context)
     // 同时保存到session storage中
     sessionStorage.setItem('info',JSON.stringify({candidateInfo,interviewerInfo}))

@@ -7,11 +7,12 @@ import Recorder from 'js-audio-recorder';
 import {ConnectionContext} from '../Candidate'
 
 const EquipmentCheck = (props) => {
-  // hooks
-  const {context} = useContext(ConnectionContext)
+  // hooks，只要能来到该界面 context就一定是有值的
+  const {context,setContext} = useContext(ConnectionContext)
   
   const video = useRef()
   const recordCover = useRef()
+  const confirmBtn = useRef()
 
   const [recording,setRecording] = useState(false)
   const [notStart,setNotStart] = useState(true)
@@ -21,22 +22,28 @@ const EquipmentCheck = (props) => {
     numChannels: 1,         // 声道，支持 1 或 2， 默认是1
     compiling: false,       // 是否边录边转换，默认是false
   }))
-
   const [stream,setStream] = useState()
+  const [equipmentStatus,setEquipmentStatus] = useState(false)
 
-  // 视频
   useEffect(() => {
+    // 视频
     const constraints = { video: true }
     navigator.mediaDevices.getUserMedia(constraints)
     .then(function(mediaStream) {
+      // 按钮
+      confirmBtn.current.style.pointerEvents = 'none'
+      
       setStream(mediaStream)
       video.current.srcObject = mediaStream;
       video.current.onloadedmetadata = function(e) {
         video.current.play()
       }
     })
-    .catch(function(err) { console.log(err.name + ": " + err.message); }); // 总是在最后检查错误
-  },[])
+    .catch(function(err) { 
+      alert(err.name + ": " + err.message)
+      setContext({...context,equipmentStatus:'error'})
+    })
+  },[context])
 
   // 录音
   function startRecord(){
@@ -64,12 +71,26 @@ const EquipmentCheck = (props) => {
     recorder.play()
     // 播放结束后改变图形
     setTimeout(() => {
+      //简单的视为已经检查完毕
+      confirmBtn.current.style.backgroundColor = '#29bdb9'
+      confirmBtn.current.style.pointerEvents = ''
+      setEquipmentStatus(true)
       setNotStart(true)
     },recorder.duration*1000)
   }
-  function stopStream(){
+
+  function handleClick(){
     // 停止流
-    stream.getTracks()[0].stop()
+    if(equipmentStatus){
+      stream.getTracks()[0].stop()
+      // 同步状态到context
+      setContext({...context,equipmentStatus})
+      const {candidateInfo,interviewerInfo} = context
+      // 同时保存到session storage中
+      sessionStorage.setItem('info',JSON.stringify({
+        candidateInfo,interviewerInfo,equipmentStatus
+      }))
+    }
   }
 
   return context===null?<div></div>:(
@@ -82,7 +103,7 @@ const EquipmentCheck = (props) => {
         <div className="check_body">
           <div className="tips">
             <p className="welcome">{context.candidateInfo.name},欢迎参加XX在线面试</p>
-            <p className="direction">请允许本网页对摄像头和麦克疯的使用权限，并确保通讯设备的正常使用</p>
+            <p className="direction">请允许本网页对摄像头和麦克疯的使用权限，并确保通讯设备的正常使用，才能进行下一步</p>
           </div>
           <div className="audio_check">
             <div className="row1">
@@ -128,7 +149,11 @@ const EquipmentCheck = (props) => {
 
             </video>
           </div>
-          <NavLink to={`/candidate/room`} className='btn confirm_info' onClick={stopStream}>确定</NavLink>
+          <NavLink 
+            ref={confirmBtn}
+            to={`/candidate/room`} 
+            className='btn confirm_info' 
+            onClick={handleClick}>确定</NavLink>
         </div>
       </div>
     </section>

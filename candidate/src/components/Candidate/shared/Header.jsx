@@ -10,22 +10,20 @@ const Header = (props) => {
   const {context,setContext} = useContext(ConnectionContext)
 
    // 登陆 持久化
-  if(sessionStorage.getItem('info') 
-    && context===null
-    // && props.location.pathname!=='/candidate/equipmentCheck'
-    ){
-    const {candidateInfo,interviewerInfo} = JSON.parse(sessionStorage.getItem('info'))
-    const connection = wsCreator(candidateInfo.id)
-    const context = {connection,candidateInfo,interviewerInfo}
-    setContext(context)
+  if(sessionStorage.getItem('info')){
+    const {candidateInfo,interviewerInfo,equipmentStatus} = JSON.parse(sessionStorage.getItem('info'))
+    if(equipmentStatus && props.location.pathname==='/'){
+      props.history.push('/candidate/room')
+    }
+    if(context===null){
+      const connection = wsCreator(candidateInfo.id)
+      const context = {connection,candidateInfo,interviewerInfo,equipmentStatus}
+      setContext(context)
+    }
   }
 
-  // context有值，而且已经检测设备，跳到room
-  // 在context更新后跳转
-  // useEffect(() => {
-  //   // && props.location.pathname !== '/candidate/equipmentCheck'
-  //   if(context!==null) props.history.push('/candidate/room')
-  // },[context])
+  // storage有值 而且 检测通过 而且 在登陆页，直接跳到room
+  
 
   return (
     <header className="layout_header">
