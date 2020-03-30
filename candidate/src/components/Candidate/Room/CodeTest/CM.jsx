@@ -35,19 +35,10 @@ const CM = () => {
     switch(msg.type) {
       case 'codeChange':
         console.log(msg.changeObj)
+        
         break
     }
   })
-
-  function handleChange(instance,changeObj){
-    sendToServer({
-      changeObj,
-      type: "codeChange",
-      name: myID,
-      // target: targetID,
-      date: Date.now(),
-    })
-  }
 
   useEffect(()=>{
     const commonOptions = {
@@ -71,6 +62,16 @@ const CM = () => {
       styleActiveLine:true,
     })
     editor.on('change',handleChange)
+
+    function handleChange(instance,changeObj){
+      sendToServer({
+        changeObj,
+        type: "codeChange",
+        name: myID,
+        target: targetID,
+        date: Date.now(),
+      })
+    }
   },[])
 
 

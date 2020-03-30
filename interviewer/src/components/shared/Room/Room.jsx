@@ -14,7 +14,8 @@ import wsCreator from './Chat/webSocket'
 export const ConnectionContext = new createContext(null)
 
 const Room = (props) => {
-  const candidateInfo = JSON.parse(props.match.params.info)
+
+  const candidateInfo = props.location.state
   const interviewerInfo = props.interviewerInfo
   const connection = wsCreator(interviewerInfo.name+interviewerInfo.phone)
 

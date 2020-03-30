@@ -18,7 +18,10 @@ const Row = (props) => {
   const tableRow = useRef()
   const [info,setInfo] = useState({name,phone,email,date,time,status})
   const [editable,setEditable] = useState(false)
-
+  const path = {
+    pathname:'/interviewer/room',
+    state:info
+  }
   useEffect(() => {
     // 当name,phone 其中一个为空的时候，editable
     if(name==='' || phone==='') handleEditBtn()
@@ -68,7 +71,7 @@ const Row = (props) => {
       </td>
       <td>
         <a className="table_btn" ref={editBtn} onClick={handleEditBtn}>编辑</a>
-        <NavLink className="table_btn" to={`/interviewer/room/${JSON.stringify(info)}`}>进入房间</NavLink>
+        <NavLink className="table_btn" to={path}>进入房间</NavLink>
       </td>
     </tr>
   )

@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext,useEffect} from 'react';
 import './Entry.less'
 
 import {reqInterviewerInfo} from 'api'
@@ -9,19 +9,28 @@ import {ConnectionContext} from '../Candidate'
 
 const CandidateEntry = (props) => {
   
-  const {setContext} = useContext(ConnectionContext)
+  const {context,setContext} = useContext(ConnectionContext)
   
   async function handleClick(){
 
-    // NOTE:point，chat.jsx cm.jsx
-    const myID = user.value+phone.value,
-          myName = user.value
-    const targetInfo = await reqInterviewerInfo({id:myID})
-    const targetID = targetInfo.pk
-    const connection = wsCreator(myID)
-    setContext({connection,myID,myName,targetID,targetInfo})
-    props.history.push('/candidate/room')
+    const candidateInfo = {
+      id:user.value+phone.value,
+      name:user.value,
+      phone:phone.value
+    }
+    const interviewerInfo = await reqInterviewerInfo({id:candidateInfo.id})
+    const connection = wsCreator(candidateInfo.id)
+    const context = {connection,candidateInfo,interviewerInfo}
+    setContext(context)
+    // 同时保存到session storage中
+    sessionStorage.setItem('info',JSON.stringify({candidateInfo,interviewerInfo}))
   }
+
+  // 在context更新后跳转
+  useEffect(() => {
+    if(context!==null) props.history.push('/candidate/equipmentCheck')
+  },[context])
+
   return (
     <section className='entry_box'>
       <form action="">

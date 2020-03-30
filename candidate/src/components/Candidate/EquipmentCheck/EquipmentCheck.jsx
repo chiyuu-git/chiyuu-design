@@ -9,7 +9,7 @@ import {ConnectionContext} from '../Candidate'
 const EquipmentCheck = (props) => {
   // hooks
   const {context} = useContext(ConnectionContext)
-  const {myName} = context
+  console.log(context)
   const video = useRef()
   const recordCover = useRef()
 
@@ -72,7 +72,7 @@ const EquipmentCheck = (props) => {
     stream.getTracks()[0].stop()
   }
 
-  return (
+  return context===null?<div></div>:(
     <section className='equipmentCheck_box'>
       <div className="check_box">
         <header className="check_header">
@@ -81,7 +81,7 @@ const EquipmentCheck = (props) => {
         </header>
         <div className="check_body">
           <div className="tips">
-            <p className="welcome">{myName},欢迎参加XX在线面试</p>
+            <p className="welcome">{context.candidateInfo.name},欢迎参加XX在线面试</p>
             <p className="direction">请允许本网页对摄像头和麦克疯的使用权限，并确保通讯设备的正常使用</p>
           </div>
           <div className="audio_check">

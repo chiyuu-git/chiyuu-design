@@ -11,12 +11,11 @@ const Chat = () => {
   const chatRecorder = useRef()
 
   const {context} = useContext(ConnectionContext)
-  const {connection,myID,targetID,targetInfo} = context
-  const {name,phone} = targetInfo
+  const {connection,candidateInfo,interviewerInfo} = context
 
   useEffect(() => {
-    webRTC(connection,myID,targetID)
-    textChat(connection,myID,targetID)
+    webRTC(connection,candidateInfo.name,interviewerInfo.id)
+    textChat(connection,candidateInfo.name,interviewerInfo.id)
     
     const maxHeight = getComputedStyle(chatRecorder.current).height
     chatRecorder.current.style.maxHeight = maxHeight
@@ -38,9 +37,9 @@ const Chat = () => {
         </div>
       </div>
       <div className='interviewer_info'>
-        <p>面试官 - {name}<span className='status'>离线</span></p>
+        <p>面试官 - {interviewerInfo.name}<span className='status'>离线</span></p>
         <p>
-          <i className='iconfont icon-phone'></i>{phone}
+          <i className='iconfont icon-phone'></i>{interviewerInfo.phone}
         </p>
       </div>
       <div className='text_chat'>

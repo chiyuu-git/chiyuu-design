@@ -1,24 +1,18 @@
-import React,{createContext} from 'react';
+import React,{useEffect,useContext} from 'react';
 
 import {BrowserRouter, Switch, Route, NavLink} from 'react-router-dom'
 import CodeTest from './CodeTest/CodeTest'
 import UploadFile from './UploadFile/UploadFile'
 import Chat from './Chat/Chat'
 import EquipmentInfo from './EquipmentInfo'
-
 import './Room.less'
 
-import wsCreator from './Chat/webSocket'
-
-// NOTE:point，chat.jsx cm.jsx
-// let myUsername = '高13724824476'
-// let targetUsername = '张三12345678910'
-// const connection = wsCreator(myUsername)
-
-// export const ConnectionContext = new createContext(connection)
+import {ConnectionContext} from '../Candidate'
 
 const Room = (props) => {
-  return (
+  const {context} = useContext(ConnectionContext)
+
+  return context===null?<div></div>:(
     <section className="room_box">
       <div className="answer_box">
         <BrowserRouter>
@@ -37,7 +31,7 @@ const Room = (props) => {
       </div>
       <Chat/>
     </section>
-  );
+  )
 };
 
 export default Room;

@@ -19,7 +19,8 @@ const getInterviewerInfo = async function(ctx,next){
   const pk = ctx.query.id
   let candidateInfo = await Candidate.getInterviewerByPk(pk)
   let result = await User.getUserByPk(candidateInfo.foreignKey)
-  // 只需要返回name即可，因为ws只通过pk识别，name用于展示
+  // 添加id，却别服务端和客户端
+  result.id = result.pk
   ctx.response.body = result
 }
 

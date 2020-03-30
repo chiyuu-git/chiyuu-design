@@ -1,7 +1,8 @@
 import {sendToServer,log,log_error,reportError} from './webSocket'
 // 火狐发起可以和chrome通信，chrome发起无法和火狐通信
 // 使用了adapter之后反而两边都不行了
-export default function webRTC(connection,myUsername,targetUsername){
+// name用于展示，id用于寻找
+export default function webRTC(connection,myName,targetID){
   // NOTE: webRTC Part
   var mediaConstraints = {
     audio: true,            // We want an audio track
@@ -92,9 +93,9 @@ export default function webRTC(connection,myUsername,targetUsername){
       //   return;
       // }
 
-      log("Inviting user " + targetUsername);
+      log("Inviting user " + targetID);
 
-      log("Setting up connection to invite user: " + targetUsername);
+      log("Setting up connection to invite user: " + targetID);
       createPeerConnection();
 
       try {
@@ -155,8 +156,8 @@ export default function webRTC(connection,myUsername,targetUsername){
 
       log("---> Sending the offer to the remote peer");
       sendToServer({
-        name: myUsername,
-        target: targetUsername,
+        name: myName,
+        target: targetID,
         type: "video-offer",
         sdp: myPeerConnection.localDescription
       });
@@ -167,9 +168,9 @@ export default function webRTC(connection,myUsername,targetUsername){
   }
 
   async function handleVideoOfferMsg(msg) {
-    targetUsername = msg.name;
+    targetID = msg.name;
 
-    log("Received video chat offer from " + targetUsername);
+    log("Received video chat offer from " + targetID);
     if (!myPeerConnection) {
       createPeerConnection();
     }
@@ -216,8 +217,8 @@ export default function webRTC(connection,myUsername,targetUsername){
     showVideo(true)
 
     sendToServer({
-      name: myUsername,
-      target: targetUsername,
+      name: myName,
+      target: targetID,
       type: "video-answer",
       sdp: myPeerConnection.localDescription
     });
@@ -257,7 +258,7 @@ export default function webRTC(connection,myUsername,targetUsername){
 
       sendToServer({
         type: "new-ice-candidate",
-        target: targetUsername,
+        target: targetID,
         candidate: event.candidate
       });
     }
@@ -271,8 +272,8 @@ export default function webRTC(connection,myUsername,targetUsername){
     showVideo(false)
     
     sendToServer({
-      name: myUsername,
-      target: targetUsername,
+      name: myName,
+      target: targetID,
       type: "hang-up"
     });
   }
@@ -340,7 +341,7 @@ export default function webRTC(connection,myUsername,targetUsername){
       }
   
       makeHangUpBtnDisabled(true)
-      targetUsername = null;
+      targetID = null;
     }
   
   function handleGetUserMediaError(e) {

@@ -20,7 +20,7 @@ const Interviewer = () => {
       <Route path='/interviewer/login' component={Entry}/>
       <Route path='/interviewer/manage' component={Manage}/>
       <Route path='/interviewer/equipmentCheck' component={EquipmentCheck}/>
-      <Route path='/interviewer/room/:info' component={Room} />
+      <Route path='/interviewer/room' component={Room} />
     </Switch>
       </div>
       <Footer/>

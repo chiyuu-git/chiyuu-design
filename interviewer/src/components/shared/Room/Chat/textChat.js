@@ -1,6 +1,7 @@
 import {sendToServer} from './webSocket'
 
-export default function textChat(connection,myUsername,targetUsername){
+// myName用于做DOM显示，targetUsername用于做ws标识
+export default function textChat(connection,myName,targetID){
   // DOM
   const chatRecorder = document.querySelector(".chat_recorder")
   const textInput = document.querySelector(".chat_toolbar>input")
@@ -18,8 +19,6 @@ export default function textChat(connection,myUsername,targetUsername){
         const timeStr = time.toLocaleTimeString();
         chatRecorder.innerHTML += `<p class='remote'>[${timeStr}]${msg.name}:${msg.text}</p>`;
         chatRecorder.scrollTop = chatRecorder.scrollHeight - chatRecorder.clientHeight;
-        chatRecorder.innerHTML += `<p>[${timeStr}]${msg.name}:${msg.text}</p>`;
-        chatRecorder.scrollTop = chatRecorder.scrollHeight - chatRecorder.clientHeight;
         break
     }
   }
@@ -28,10 +27,15 @@ export default function textChat(connection,myUsername,targetUsername){
       const msg = {
         text: evt.target.value,
         type: "message",
-        name: myUsername,
-        // target: targetUsername,
+        name: myName,
+        target: targetID,
         date: Date.now(),
       };
+      // 本地显示
+      const time = new Date(msg.date);
+      const timeStr = time.toLocaleTimeString();
+      chatRecorder.innerHTML += `<p>[${timeStr}]${myName}:${evt.target.value}</p>`;
+      chatRecorder.scrollTop = chatRecorder.scrollHeight - chatRecorder.clientHeight;
       sendToServer(msg);
       evt.target.value = "";
     }

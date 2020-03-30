@@ -33,25 +33,6 @@ const CM = () => {
   let myID = interviewerInfo.name+interviewerInfo.phone
   let targetID = candidateInfo.name+candidateInfo.phone
 
-  connection.addEventListener('message',(evt) => {
-    const msg = JSON.parse(evt.data);
-    switch(msg.type) {
-      case 'codeChange':
-        console.log(msg.changeObj)
-        break
-    }
-  })
-  
-  function handleChange(instance,changeObj){
-    sendToServer({
-      changeObj,
-      type: "codeChange",
-      name: myID,
-      // target: targetID,
-      date: Date.now(),
-    })
-  }
-
   useEffect(()=>{
     const commonOptions = {
       value: "function myScript(){return 100;}\n",
@@ -69,11 +50,34 @@ const CM = () => {
       autoCloseBrackets:true,
     }
 
-    const editor = CodeMirror.fromTextArea(cm_placeholder.current,{
+    const receiver = CodeMirror.fromTextArea(cm_placeholder.current,{
       ...commonOptions,
       styleActiveLine:true,
     })
-    editor.on('change',handleChange)
+    connection.addEventListener('message',(evt) => {
+      const msg = JSON.parse(evt.data);
+      switch(msg.type) {
+        case 'codeChange':
+          console.log(msg.changeObj)
+          const {from,to,text} = msg.changeObj
+          receiver.replaceRange(text,from,to)
+          break
+      }
+    })
+
+    // editor.on('change',handleChange)
+
+    // function handleChange(instance,changeObj){
+    //   sendToServer({
+    //     changeObj,
+    //     type: "codeChange",
+    //     name: myID,
+    //     // target: targetID,
+    //     date: Date.now(),
+    //   })
+    // }
+
+
   },[])
 
 

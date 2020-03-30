@@ -1,19 +1,20 @@
-import React,{useState,createContext} from 'react';
-import {Switch, Route, NavLink} from 'react-router-dom'
+import React,{useState,createContext,useEffect} from 'react';
+import {Switch, Route,} from 'react-router-dom'
 
-import Header from 'shared/Header'
-import Footer from 'shared/Footer'
+import Header from './shared/Header'
+import Footer from './shared/Footer'
 import CandidateEntry from './CandidateEntry/CandidateEntry'
 import EquipmentCheck from './EquipmentCheck/EquipmentCheck'
 import Room from './Room/Room'
 import './Candidate.less'
 
+import wsCreator from './Room/Chat/webSocket'
 
 export let ConnectionContext =  new createContext()
 
-const Candidate = () => {
+const Candidate = (props) => {
   const [context,setContext] = useState(null)
-  
+
   return (
     <ConnectionContext.Provider value={{context,setContext}}>
       <section className='candidate_box'>

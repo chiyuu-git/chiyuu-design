@@ -44,7 +44,6 @@ module.exports = merge.smart(baseWebpackConfig, {
     // 快捷访问
     alias: {
       assets: path.resolve(__dirname, '../src/assets'),
-      shared: path.resolve(__dirname, '../src/components/shared'),
       api: path.resolve(__dirname, '../src/api'),
     }
   },
