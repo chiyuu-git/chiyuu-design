@@ -1,3 +1,2 @@
-网页端+electron客户端
-
-客户端给企业用方便，网页端给用户用，方便
+npm i 
+npm start
