@@ -40,7 +40,7 @@ const Chat = () => {
         </div>
       </div>
       <div className='interviewer_info'>
-        <p>面试者 - {candidateInfo.name}<span className='status'>离线</span></p>
+        <p>面试者 - {candidateInfo.name}<span className='status'>在线</span></p>
         <p>
           <i className='iconfont icon-phone'></i>{candidateInfo.phone}|
           <i className='iconfont icon-email'></i>{candidateInfo.email}

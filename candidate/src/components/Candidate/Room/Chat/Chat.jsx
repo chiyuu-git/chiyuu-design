@@ -37,7 +37,7 @@ const Chat = () => {
         </div>
       </div>
       <div className='interviewer_info'>
-        <p>面试官 - {interviewerInfo.name}<span className='status'>离线</span></p>
+        <p>面试官 - {interviewerInfo.name}<span className='status'>在线</span></p>
         <p>
           <i className='iconfont icon-phone'></i>{interviewerInfo.phone}
         </p>
