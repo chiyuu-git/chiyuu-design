@@ -1,7 +1,7 @@
 import React,{useRef,useState,useEffect} from 'react';
 
 import { connect } from 'react-redux';
-import { loadCandidateListAsync } from '../InterviewerRedux'; 
+import { loadCandidateListAsync,updateCandidateAsync } from '../InterviewerRedux'; 
 
 import './Manage.less'
 import Row from './Row'
@@ -20,12 +20,14 @@ const Manage = (props) => {
       <Row 
         key={name+phone}
         {...candidate}
+        candidateList
+        updateCandidateAsync={props.updateCandidateAsync}
       />
     )
 
   })
 
-  // NOTE:调试用，临时
+  // 刷新后重新获取数据
   useEffect(() => {
     props.loadCandidateListAsync({id}).then((result) => {
       setCandidateList([...candidateList,...result])
@@ -35,9 +37,10 @@ const Manage = (props) => {
   function handleAdd(){
     setCandidateList([...candidateList,{
       name:'',phone:'',email:'',
-      date:'2015/08/06',
+      date:'2015-08-06',
       time:'08:00:00',
-      status:'notStart'
+      status:'notStart',
+      foreignKey:id
     }])
     
   }
@@ -106,5 +109,6 @@ export default connect(
   ), 
   {
     loadCandidateListAsync,
+    updateCandidateAsync,
   }
 )(Manage); 

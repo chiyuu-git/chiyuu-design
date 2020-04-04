@@ -10,6 +10,8 @@ router.post('/login',UserController.login)
 router.get('/candidateList',CandidateController.getCandidateList)
 // 获取 面试者的 面试官
 router.get('/interviewerInfo',CandidateController.getInterviewerInfo)
+// 更新面试者信息
+router.post('/updateCandidate',CandidateController.updateCandidate)
 
 router.post('/user/:id', UserController.getUserInfo) //用POST请求
 router.patch('/user/update/:id',UserController.updateUser) // 更新用户信息

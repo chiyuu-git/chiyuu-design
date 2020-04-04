@@ -13,7 +13,7 @@ const getCandidateListByPk = async function(pk) {
   return candidateList
 }
 
-const updateCandidateById = async function(pk,newInfo){
+const updateCandidateByPK = async function(pk,newInfo){
   const candidateInfo = await CandidateModel.update(newInfo,{
     where:{
       pk
@@ -34,13 +34,15 @@ const createCandidate = async function(candidateInfo){
 //   })
 //   return candidate 
 // }
-const getInterviewerByPk = async function(pk){
+
+const getCandidateByPk = async function(pk){
   const candidate = await CandidateModel.findByPk(pk)
   return candidate 
 }
 
 module.exports =  {
   getCandidateListByPk,
-  updateCandidateById,
-  getInterviewerByPk,
+  createCandidate,
+  updateCandidateByPK,
+  getCandidateByPk,
 }

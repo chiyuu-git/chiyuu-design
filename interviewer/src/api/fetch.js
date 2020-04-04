@@ -20,7 +20,7 @@ export default async function myFetch(
   if(method === 'GET') {
     if(query) url += `?${query}`
   }
-
+  console.log(query)
   // 不同的请求不同的fetch
   try {
     switch(method){
