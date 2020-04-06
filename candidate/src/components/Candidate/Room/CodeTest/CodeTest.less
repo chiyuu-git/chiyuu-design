@@ -37,6 +37,7 @@
     display: flex;
     flex-direction: column;
     min-width: 500px;
+    margin:0 0 10px;
     .code_toolbar{
       display: flex;
       align-items: center;
@@ -88,27 +89,36 @@
         flex-grow:1;
       }
     }
-    .CodeMirror-wrap{
+    .code-mirror{
       flex-grow: 1;
-    }
-    .code_result{
       display: flex;
-      align-items: center;
-      height:48px;
-      padding:0 10px;
-      margin:10px 0;
-      border:@border;
-      background-color: white;
-      .grow_wrap{
+      flex-direction: column;
+      .CodeMirror-wrap{
         flex-grow: 1;
-        .result_btn{
-          color:black;
-          cursor: pointer;
+      }
+      .code_run{
+        display: flex;
+        align-items: center;
+        height:48px;
+        padding:0 10px;
+        
+        background-color: white;
+        .grow_wrap{
+          flex-grow: 1;
+          .result_btn{
+            color:black;
+            cursor: pointer;
+          }
+        }
+        .run_btn{
+          background-color: #29bdb9;
+          color:#fff;
         }
       }
-      .run_btn{
-        background-color: #29bdb9;
-        color:#fff;
+      .code_result_box{
+        padding:10px;
+        background-color: white;
+        border-top:@border;
       }
     }
   }

@@ -1,4 +1,4 @@
-import React,{useRef,useEffect,useContext} from 'react';
+import React,{useState,useRef,useEffect,useContext} from 'react';
 
 import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
@@ -25,20 +25,26 @@ import 'codemirror/addon/selection/active-line'
 import {ConnectionContext} from '../../Candidate'
 import {sendToServer} from '../Chat/webSocket'
 
-const CM = () => {
+const CM = (props) => {
   const cm_placeholder = useRef(null)
+  const codeResultBox = useRef(null)
+  const [codeResult,setCodeResult] = useState(null)
+  const [showResult,setShowResult] = useState(false)
+  // 代码同步是单向的，因此这里不需要
   const {context} = useContext(ConnectionContext)
-  const {connection,myID,targetID} = context
+  const {myID,targetID} = context
 
-  connection.addEventListener('message',(evt) => {
-    const msg = JSON.parse(evt.data);
-    switch(msg.type) {
-      case 'codeChange':
-        console.log(msg.changeObj)
+  let editor = null
+
+  // connection.addEventListener('message',(evt) => {
+  //   const msg = JSON.parse(evt.data);
+  //   switch(msg.type) {
+  //     case 'codeChange':
+  //       console.log(msg.changeObj)
         
-        break
-    }
-  })
+  //       break
+  //   }
+  // })
 
   useEffect(()=>{
     const commonOptions = {
@@ -57,7 +63,7 @@ const CM = () => {
       autoCloseBrackets:true,
     }
 
-    const editor = CodeMirror.fromTextArea(cm_placeholder.current,{
+    editor = CodeMirror.fromTextArea(cm_placeholder.current,{
       ...commonOptions,
       styleActiveLine:true,
     })
@@ -74,11 +80,42 @@ const CM = () => {
     }
   },[])
 
-
-
+  // code 是一段可执行的js字符串，自动输出返回值
+  // 提供一个print函数用于输出
+  function runCode(){
+    let result = null
+    try{
+      result = Function(`
+        return function(print){
+          ${editor.getValue()}
+        }
+      `)()(print)
+    }
+    catch(error){
+      setCodeResult(error+'')
+    }
+    setShowResult(!showResult)
+  }
+  function print(result){
+    setCodeResult(result)
+    console.log(result)
+  }
   return (
-    <textarea ref={cm_placeholder}>
-    </textarea>
+    <section className='code-mirror'>
+      <textarea ref={cm_placeholder}></textarea>
+      <div className="code_run">
+          <div className="grow_wrap">
+            <a className='result_btn' onClick={() => setShowResult(!showResult)}>
+              运行结果
+              <i className={`iconfont ${showResult?'icon-arrow_down':'icon-arrow_up'}`}></i>
+            </a>
+          </div>
+          <a className='btn run_btn' onClick={runCode}>提交运行</a>
+      </div>
+      <div className="code_result_box" ref={codeResultBox} style={showResult?{display:'block'}:{display:'none'}}>
+        输出如下：{codeResult}
+      </div>
+    </section>
   )
 };
 

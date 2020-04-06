@@ -9,11 +9,7 @@ import Recorder from 'js-audio-recorder';
 
 
 const EquipmentCheck = (props) => {
-  const candidateInfo = props.location.state
-  const path = {
-    pathname:'/interviewer/manage',
-    state:candidateInfo
-  }
+  
   // hooks
   const video = useRef()
   const recordCover = useRef()

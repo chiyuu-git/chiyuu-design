@@ -41,7 +41,7 @@ const CodeTest = (props) => {
       <div className="test_box">
         <header>任务</header>
         <div className="test_info">
-          <textarea placeholder='面试官提出的问题将出现在这里' onChange={handleChange} ></textarea>
+          <textarea placeholder='可以在这里输入问题' onChange={handleChange} ></textarea>
         </div>
       </div>
       <div className="code_box">
