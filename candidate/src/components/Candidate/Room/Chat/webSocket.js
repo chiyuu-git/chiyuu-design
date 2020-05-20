@@ -1,5 +1,5 @@
 // webSocket 连接部分
-const myHostname = window.location.hostname||"localhost"
+const myHostname = window.location.hostname || "localhost"
 const scheme = "ws";
 if (document.location.protocol === "https:") {
   scheme += "s";
@@ -10,26 +10,33 @@ let connection = null
 
 let clientID = 0
 
-export default function wsCreator(myUsername) {
+export default function wsCreator(myUsername, targetUsername) {
   log(`Connecting to server: ${serverUrl}`)
   connection = new WebSocket(serverUrl, "json")
 
-  connection.onopen = function(evt) {
+  connection.onopen = function (evt) {
     console.log('websocket open')
+    // online
+    sendToServer({
+      type: "online",
+      name: myUsername,
+      target: targetUsername,
+      date: Date.now(),
+    })
   }
-  connection.onerror = function(evt) {
+  connection.onerror = function (evt) {
     console.dir(evt)
   }
-  connection.onclose = function(evt) {
+  connection.onclose = function (evt) {
     console.log('websocket close')
   }
 
-  connection.addEventListener('message',(evt) => {
+  connection.addEventListener('message', (evt) => {
     const msg = JSON.parse(evt.data);
     log("Message received:");
     console.dir(msg)
 
-    switch(msg.type) {
+    switch (msg.type) {
       case "id":
         clientID = msg.id
         sendToServer({
@@ -56,7 +63,7 @@ function handleUserlistMsg(msg) {
     listElem.removeChild(listElem.firstChild);
   }
 
-  msg.users.forEach(function(username) {
+  msg.users.forEach(function (username) {
     var item = document.createElement("li");
     item.appendChild(document.createTextNode(username));
     item.addEventListener("click", invite, false);
@@ -81,8 +88,8 @@ export function reportError(errMessage) {
 
 // 通用函数
 export function sendToServer(msg) {
-var msgJSON = JSON.stringify(msg);
+  var msgJSON = JSON.stringify(msg);
 
-console.log("Sending '" + msg.type + "' message: " + msgJSON);
-connection.send(msgJSON);
+  console.log("Sending '" + msg.type + "' message: " + msgJSON);
+  connection.send(msgJSON);
 }

@@ -1,29 +1,29 @@
-import React,{useEffect,useContext} from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import CM from './CM'
 import './CodeTest.less'
 
-import {ConnectionContext} from '../Room'
-import {sendToServer} from '../Chat/webSocket'
+import { ConnectionContext } from '../Room'
+import { sendToServer } from '../Chat/webSocket'
 
 const CodeTest = (props) => {
 
-  const {connection,candidateInfo,interviewerInfo} = useContext(ConnectionContext)
+  const { connection, candidateInfo, interviewerInfo } = useContext(ConnectionContext)
 
   // NOTE:point
-  let myID = interviewerInfo.name+interviewerInfo.phone
-  let targetID = candidateInfo.name+candidateInfo.phone
+  let myID = interviewerInfo.name + interviewerInfo.phone
+  let targetID = candidateInfo.name + candidateInfo.phone
 
-  connection.addEventListener('message',(evt) => {
+  connection.addEventListener('message', (evt) => {
     const msg = JSON.parse(evt.data);
-    switch(msg.type) {
+    switch (msg.type) {
       case 'testInfo':
         console.log(msg.quest)
         break
     }
   })
 
-  function handleChange(evt){
+  function handleChange(evt) {
     const quest = evt.target.value
     console.log(quest)
     sendToServer({
@@ -65,10 +65,6 @@ const CodeTest = (props) => {
           <a className='fullscreen_btn'><i className='iconfont icon-fullscreen'></i></a>
         </div>
         <CM />
-        <div className="code_result">
-          <div className="grow_wrap"><a className='result_btn'>运行结果<i className='iconfont icon-arrow_up'></i></a></div>
-          <a className='btn run_btn'>提交运行</a>
-        </div>
       </div>
     </section>
   );

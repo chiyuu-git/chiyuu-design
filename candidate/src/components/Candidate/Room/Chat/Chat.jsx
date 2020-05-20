@@ -1,8 +1,8 @@
-import React, { useEffect,useRef,useContext } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 
 import webRTC from './webRTC'
 import textChat from './textChat'
-import {ConnectionContext} from '../../Candidate'
+import { ConnectionContext } from '../../Candidate'
 // import adapter from 'webrtc-adapter';
 
 import './Chat.less'
@@ -10,16 +10,16 @@ import './Chat.less'
 const Chat = () => {
   const chatRecorder = useRef()
 
-  const {context} = useContext(ConnectionContext)
-  const {connection,candidateInfo,interviewerInfo} = context
+  const { context } = useContext(ConnectionContext)
+  const { connection, candidateInfo, interviewerInfo } = context
 
   useEffect(() => {
-    webRTC(connection,candidateInfo.id,interviewerInfo.id)
-    textChat(connection,candidateInfo.id,interviewerInfo.id)
-    
+    webRTC(connection, candidateInfo.id, interviewerInfo.id)
+    textChat(connection, candidateInfo.id, interviewerInfo.id)
+
     const maxHeight = getComputedStyle(chatRecorder.current).height
     chatRecorder.current.style.maxHeight = maxHeight
-  },[])
+  }, [])
 
   return (
     <div className="chat_box">

@@ -1,19 +1,19 @@
-import React,{useRef,useEffect,useContext} from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 
 import CM from './CM'
 import './CodeTest.less'
 
-import {ConnectionContext} from '../../Candidate'
-import {sendToServer} from '../Chat/webSocket'
+import { ConnectionContext } from '../../Candidate'
+import { sendToServer } from '../Chat/webSocket'
 
 const CodeTest = (props) => {
   const textArea = useRef()
-  const {context} = useContext(ConnectionContext)
-  const {connection,myID,targetID} = context
+  const { context } = useContext(ConnectionContext)
+  const { connection, myID, targetID } = context
 
-  connection.addEventListener('message',(evt) => {
+  connection.addEventListener('message', (evt) => {
     const msg = JSON.parse(evt.data);
-    switch(msg.type) {
+    switch (msg.type) {
       case 'testInfo':
         textArea.current.value = msg.quest
         break
@@ -41,7 +41,7 @@ const CodeTest = (props) => {
       <div className="test_box">
         <header>任务</header>
         <div className="test_info">
-          <textarea placeholder='面试官提出的问题将出现在这里' ref={textArea} ></textarea>
+          <textarea placeholder='面试官提出的问题将出现在这里' ref={textArea} readOnly></textarea>
         </div>
       </div>
       <div className="code_box">
@@ -64,7 +64,7 @@ const CodeTest = (props) => {
           <div className="placeholder"></div>
           <a className='fullscreen_btn'><i className='iconfont icon-fullscreen'></i></a>
         </div>
-        <CM runCode/>
+        <CM />
       </div>
     </section>
   );

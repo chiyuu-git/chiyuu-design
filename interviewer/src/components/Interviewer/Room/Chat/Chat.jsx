@@ -1,28 +1,38 @@
-import React, { useEffect,useRef,useContext } from 'react';
+import React, { useEffect, useRef, useContext, useState } from 'react';
 
 import webRTC from './webRTC'
 import textChat from './textChat'
-import {ConnectionContext} from '../Room'
+import { ConnectionContext } from '../Room'
 // import adapter from 'webrtc-adapter';
 
 import './Chat.less'
 
 const Chat = () => {
   const chatRecorder = useRef()
+  const [targetOnline, setTargetOnline] = useState(false)
 
-  const {connection,candidateInfo,interviewerInfo} = useContext(ConnectionContext)
+  const { connection, candidateInfo, interviewerInfo } = useContext(ConnectionContext)
 
   // let myID = interviewerInfo.name+interviewerInfo.phone
-  let targetID = candidateInfo.name+candidateInfo.phone
-  
+  let targetID = candidateInfo.name + candidateInfo.phone
+
   useEffect(() => {
     // 只能接受ID，原因暂时不想查了
-    webRTC(connection,interviewerInfo.id,targetID)
-    textChat(connection,interviewerInfo.id,targetID)
+    webRTC(connection, interviewerInfo.id, targetID)
+    textChat(connection, interviewerInfo.id, targetID)
 
     const maxHeight = getComputedStyle(chatRecorder.current).height
     chatRecorder.current.style.maxHeight = maxHeight
-  },[])
+  }, [])
+
+  connection.addEventListener('message', (evt) => {
+    const msg = JSON.parse(evt.data);
+    switch (msg.type) {
+      case 'online':
+        setTargetOnline(true)
+        break
+    }
+  })
 
   return (
     <div className="chat_box">
@@ -40,7 +50,11 @@ const Chat = () => {
         </div>
       </div>
       <div className='interviewer_info'>
-        <p>面试者 - {candidateInfo.name}<span className='status'>在线</span></p>
+        <p>面试者 - {candidateInfo.name}
+          {targetOnline ? <span className='status'>在线</span>
+            : <span className='status offline'>离线</span>
+          }
+        </p>
         <p>
           <i className='iconfont icon-phone'></i>{candidateInfo.phone}|
           <i className='iconfont icon-email'></i>{candidateInfo.email}

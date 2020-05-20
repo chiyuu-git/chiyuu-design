@@ -1,5 +1,5 @@
-import React,{useState,createContext,useEffect} from 'react';
-import {Switch, Route,} from 'react-router-dom'
+import React, { useState, createContext, useEffect } from 'react';
+import { Switch, Route, } from 'react-router-dom'
 
 import Header from './shared/Header'
 import Footer from './shared/Footer'
@@ -8,26 +8,25 @@ import EquipmentCheck from './EquipmentCheck/EquipmentCheck'
 import Room from './Room/Room'
 import './Candidate.less'
 
-import wsCreator from './Room/Chat/webSocket'
 
-export let ConnectionContext =  new createContext()
+export let ConnectionContext = new createContext()
 
 const Candidate = (props) => {
-  const [context,setContext] = useState(null)
+  const [context, setContext] = useState(null)
 
   return (
-    <ConnectionContext.Provider value={{context,setContext}}>
+    <ConnectionContext.Provider value={{ context, setContext }}>
       <section className='candidate_box'>
-        <Header/>
+        <Header />
         <div className="candidate_body">
           <Switch>
-            <Route exact path='/' component={CandidateEntry}/>
-            <Route path='/candidate/login' component={CandidateEntry}/>
-            <Route path='/candidate/equipmentCheck' component={EquipmentCheck}/>
+            <Route exact path='/' component={CandidateEntry} />
+            <Route path='/candidate/login' component={CandidateEntry} />
+            <Route path='/candidate/equipmentCheck' component={EquipmentCheck} />
             <Route path='/candidate/room' component={Room} />
           </Switch>
         </div>
-        <Footer/>
+        <Footer />
       </section>
     </ConnectionContext.Provider>
   )
