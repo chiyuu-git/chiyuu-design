@@ -14,7 +14,7 @@ module.exports = merge.smart(baseWebpackConfig, {
   devServer: {
     contentBase: false,// 默认webpack-dev-server会为根文件夹提供本地服务器，如果想为另外一个目录下的文件提供本地服务器，应该在这里设置其所在目录
     historyApiFallback: true,// 在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
-    open:true,// 自动打开浏览器
+    open: true,// 自动打开浏览器
     compress: true,// 启用gzip压缩
     inline: true,// 设置为true，当源文件改变时会自动刷新页面
     hot: true,// 模块热更新，取决于HotModuleReplacementPlugin
@@ -24,8 +24,8 @@ module.exports = merge.smart(baseWebpackConfig, {
     proxy: {
       '/api': {
         target: 'http://localhost:6503',
-        pathRewrite: {'^/api' : ''},
-        changeOrigin:true,
+        pathRewrite: { '^/api': '' },
+        changeOrigin: true,
       }
     }
   },
